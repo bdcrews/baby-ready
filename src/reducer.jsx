@@ -1,6 +1,6 @@
 import {
   LOG_IN,
-} from './actions';
+} from './actions/actions';
 
 const initialState = {
   loggedIn: false

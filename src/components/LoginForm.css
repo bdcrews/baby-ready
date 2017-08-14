@@ -1,0 +1,12 @@
+a.forgotLogin {
+	text-align:center;
+	display:block;
+}
+
+.loginButton {
+	margin-top: 20px;
+}
+
+.login-form {
+    border: 1px solid red;
+}

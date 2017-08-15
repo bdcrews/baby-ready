@@ -1,12 +1,12 @@
 import React from 'react';
-import {Field, reduxForm, focus} from 'redux-form';
+import {reduxForm, focus} from 'redux-form';
 import {registerUser} from '../actions/users';
 import {login} from '../actions/auth';
 import {Jumbotron} from 'react-bootstrap';
-import Input from './input';
 import './Registration.css';
 import {required, nonEmpty, matches, length, isTrimmed} from '../validators';
-
+import FieldGroup from './FieldGroup'
+import {Button} from 'react-bootstrap';
 
 export class Registration extends React.Component {
     onSubmit(values) {
@@ -27,36 +27,49 @@ export class Registration extends React.Component {
                 	onSubmit={this.props.handleSubmit(values =>
                     this.onSubmit(values)
                 )}>
-	                <label htmlFor="firstName">First name</label>
-	                <Field component={Input} type="text" name="firstName"/>
-	                <label htmlFor="lastName">Last name</label>
-	                <Field component={Input} type="text" name="lastName" />
-	                <label htmlFor="email">Email</label>
-	                <Field
-	                    component={Input}
-	                    type="email"
-	                    name="username"
+  					<FieldGroup
+  					    id="formFirstName"
+                		name="firstName"
+  					    type="text"
+  					    label="First name"
+  					    placeholder=""
+  					/>
+  					<FieldGroup
+  					    id="formLastName"
+                		name="lastName"
+  					    type="text"
+  					    label="Last name"
+  					    placeholder=""
+  					/>
+  					<FieldGroup
+  					    id="formControlsEmail"
+                		name="username"
+  					    type="email"
+  					    label="Email"
+  					    placeholder=""
 	                    validate={[required, nonEmpty, isTrimmed]}
-	                />
-	                <label htmlFor="password">Password</label>
-	                <Field
-	                    component={Input}
-	                    type="password"
-	                    name="password"
+  					/>
+  					<FieldGroup
+  					    id="formControlsPassword"
+                		name="password"
+  					    label="Password"
+  					    type="password"
+  					    placeholder=""
 	                    validate={[required, length({min: 10, max: 72}), isTrimmed]}
 	                />
-	                <label htmlFor="passwordConfirm">Confirm password</label>
-	                <Field
-	                    component={Input}
-	                    type="password"
-	                    name="passwordConfirm"
-	                    validate={[required, nonEmpty, matches('password')]}
+  					<FieldGroup
+  					    id="formControlsConfirmPassword"
+                		name="confirmPassword"
+  					    label="Confirm password"
+  					    type="password"
+  					    placeholder=""
+	                    validate={[required, matches('password')]}
 	                />
-	                <button
+  			     	<Button 
 	                    type="submit"
 	                    disabled={this.props.pristine || this.props.submitting}>
 	                    Register
-	                </button>
+	                </Button>
 	            </form>
 	        </Jumbotron>
 	    );	

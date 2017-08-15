@@ -1,23 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
-import {login} from '../actions/auth';
 import './NavBar.css';
 import LoginForm from './LoginForm'
 
 export class NavBar extends React.Component {
-	onSubmit(event) {
-    event.preventDefault();
-    let usernameTaget = document.getElementById('formControlsEmail');
-    let passwordTaget = document.getElementById('formControlsPassword');
-    console.log(usernameTaget.value);
-    console.log(passwordTaget.value);
-    return this.props.dispatch(login(usernameTaget.value, passwordTaget.value));
-	}
-
   render() {
-  	let menuOptions;
   	console.log(this);
+    /*
+    let menuOptions;
     if(!this.props.loggedIn) {
     	menuOptions = (
         <LoginForm />
@@ -38,18 +29,19 @@ export class NavBar extends React.Component {
         </Nav>
       );
     }
-
-
+    */
 
     return (
       <Navbar fixedTop>
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="#">Pregnacy Organizer</a>
+            <a href="#">Baby Ready</a>
           </Navbar.Brand>
     			<Navbar.Toggle />
         </Navbar.Header>
-        {menuOptions}
+        <Navbar.Form pullRight onSubmit={(e) => this.onSubmit(e)}>
+          <LoginForm />
+        </Navbar.Form >
       </Navbar>
     );
   }  

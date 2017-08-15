@@ -1,50 +1,50 @@
 import React from 'react';
-import {Field, reduxForm, focus} from 'redux-form';
-import Input from './input';
-import {required, nonEmpty} from '../validators';
-import {login} from '../actions/auth';
 import './LoginForm.css';
+import {reduxForm, focus} from 'redux-form';
+import {Button} from 'react-bootstrap';
+import {login} from '../actions/auth';
+import FieldGroup from './FieldGroup'
 
 export class LoginForm extends React.Component {
-	onSubmit(values) {
-        return this.props.dispatch(login(values.username, values.password));
-	}
+  onSubmit(event) {
+    event.preventDefault();
+    console.log("Here");
+    let usernameTaget = document.getElementById('formControlsEmail');
+    let passwordTaget = document.getElementById('formControlsPassword');
+    return this.props.dispatch(login(usernameTaget.value, passwordTaget.value));
+  }
 
   render() {
-    return (
-        <div>
-              <form
-                  className="login-form"
-                  onSubmit={this.props.handleSubmit(values =>
-                    this.onSubmit(values)
-                )}>
-                  <label htmlFor="email">Email</label>
-                  <Field
-                      component={Input}
-                      type="email"
-                      name="username"
-                      validate={[required, nonEmpty]}
-                  />
-                  <label htmlFor="password">Password</label>
-                  <Field
-                      component={Input}
-                      type="password"
-                      name="password"
-                      validate={[required]}
-                  />
-                  <button
-                      className="loginButton"
-                      type="submit"
-                      disabled={this.props.pristine || this.props.submitting}>
-                      Register
-                  </button>
-                </form>
-        </div>
-    );
+    return(
+        <form>
+  					  <FieldGroup
+  					    id="formControlsEmail"
+                name="email"
+  					    type="email"
+  					    label="Email"
+  					    placeholder=""
+  					    required
+  					  />
+  			      {' '}
+  					  <FieldGroup
+  					    id="formControlsPassword"
+                name="password"
+  					    label="Password"
+  					    type="password"
+  					    placeholder=""
+                required
+  					  />
+  			      {' '}
+  			      <Button className="loginButton" type="submit">Log In</Button>
+              <br /><a className="forgotLogin" href="#">forgot login</a>
+			  </form>
+      );
   }  
 }
 
 export default reduxForm({
     form: 'login',
-    onSubmitFail: (errors, dispatch) => dispatch(focus('login', 'username'))
+    onSubmitFail: (errors, dispatch) => {
+      dispatch(focus('login', Object.keys(errors)[0]));
+    }
 })(LoginForm);

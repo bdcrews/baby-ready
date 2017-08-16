@@ -12,8 +12,8 @@ export function App(props) {
     <Router>
       <div className="App">
         <NavBar />
-        <Route exact path="/" component={Landing} />
-        <Route exact path="/Dashboard" component={Dashboard} />
+	        <Route exact path="/" component={Landing} />
+	        <Route exact path="/Dashboard" component={Dashboard} />
       </div>
     </Router>
   );

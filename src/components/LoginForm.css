@@ -1,4 +1,4 @@
-a.forgotLogin {
+p.forgotLogin {
 	text-align:center;
 	display:block;
 }
@@ -7,6 +7,57 @@ a.forgotLogin {
 	margin-top: 20px;
 }
 
-.login-form {
-    border: 1px solid red;
+
+.form-error:before{
+}
+
+.loginForm .form-error {    /* The tooltip */
+	display: inline-block;
+    transform-origin: 100% 0%;
+
+    -webkit-animation: fadeIn 0.3s ease-in-out;
+    animation: fadeIn 0.3s ease-in-out;
+
+    text-align: left;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: black;
+    padding: 4px;
+    position: absolute;
+    border-radius: 3px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    left: 4px;
+    top: 30px;
+    font-size: 13px;
+    line-height: 1.4;
+	pointer-events: none;
+}
+
+.loginForm .form-error:before{ /* The pointer of the tooltip */
+    position: absolute;
+    content: '';
+    width:0;
+    height: 0;
+    border:6px solid transparent;
+    border-bottom-color:#1E2021;
+    left:10px;
+    top:-12px;
+}
+
+/* CSS animation */
+
+@-webkit-keyframes fadeIn {
+    0% { 
+        opacity:0; 
+        transform: scale(0.6);
+    }
+
+    100% {
+        opacity:100%;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    0% { opacity:0; }
+    100% { opacity:100%; }
 }

@@ -1,13 +1,19 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Navbar, Nav, NavItem, NavDropdown, MenuItem} from 'react-bootstrap';
+import {Navbar, Nav, NavDropdown, MenuItem, Glyphicon} from 'react-bootstrap';
 import './NavBar.css';
 import LoginForm from './LoginForm'
+import {setCurrentUser, setAuthToken} from '../actions/auth';
+import {clearAuthToken} from '../local-storage';
 
 export class NavBar extends React.Component {
+  logOut() {
+    this.props.dispatch(setCurrentUser(null));
+    this.props.dispatch(setAuthToken(null));
+    clearAuthToken();
+  }
+
   render() {
-  	console.log(this);
-    /*
     let menuOptions;
     if(!this.props.loggedIn) {
     	menuOptions = (
@@ -17,19 +23,14 @@ export class NavBar extends React.Component {
     else {
     	menuOptions = (
         <Nav>
-          <NavItem eventKey={1} href="#">Login</NavItem>
-          <NavItem eventKey={2} href="#">Link</NavItem>
-          <NavDropdown eventKey={3} title="Dropdown" id="basic-nav-dropdown">
-            <MenuItem eventKey={3.1}>Action</MenuItem>
-            <MenuItem eventKey={3.2}>Another action</MenuItem>
-            <MenuItem eventKey={3.3}>Something else here</MenuItem>
-            <MenuItem divider />
-            <MenuItem eventKey={3.4}>Separated link</MenuItem>
-          </NavDropdown>
+        <NavDropdown title={this.props.name} eventKey={2} id="basic-nav-dropdown" pullRight>
+          <MenuItem header>Account</MenuItem>
+          <MenuItem divider />
+          <MenuItem eventKey={2.1} onClick={() => this.logOut()}>Logout</MenuItem>
+        </NavDropdown>
         </Nav>
       );
     }
-    */
 
     return (
       <Navbar fixedTop>
@@ -39,17 +40,24 @@ export class NavBar extends React.Component {
           </Navbar.Brand>
     			<Navbar.Toggle />
         </Navbar.Header>
-        <Navbar.Form pullRight onSubmit={(e) => this.onSubmit(e)}>
-          <LoginForm />
+        <Navbar.Form pullRight>
+          {menuOptions}
         </Navbar.Form >
       </Navbar>
     );
   }  
 }
 
-const mapStateToProps = state => ({
-  loggedIn: state.loggedIn
-});
+const mapStateToProps = state => {
+  const {currentUser} = state.auth;
+  return {
+      loggedIn: currentUser !== null,
+      username: currentUser ? state.auth.currentUser.username : '',
+      name: currentUser
+          ? `${currentUser.firstName} ${currentUser.lastName}`
+          : ''
+  };
+};
 
 export default connect(mapStateToProps)(NavBar);
 

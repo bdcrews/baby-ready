@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Navbar, Nav, NavDropdown, MenuItem, Glyphicon} from 'react-bootstrap';
+import {Navbar, NavDropdown, MenuItem} from 'react-bootstrap';
 import './NavBar.css';
 import LoginForm from './LoginForm'
 import {setCurrentUser, setAuthToken} from '../actions/auth';
@@ -22,27 +22,27 @@ export class NavBar extends React.Component {
     }
     else {
     	menuOptions = (
-        <Nav>
         <NavDropdown title={this.props.name} eventKey={2} id="basic-nav-dropdown" pullRight>
           <MenuItem header>Account</MenuItem>
           <MenuItem divider />
           <MenuItem eventKey={2.1} onClick={() => this.logOut()}>Logout</MenuItem>
         </NavDropdown>
-        </Nav>
       );
     }
 
     return (
-      <Navbar fixedTop>
+      <Navbar fixedTop collapseOnSelect className="NavBar">
         <Navbar.Header>
           <Navbar.Brand>
-            <a href="#">Baby Ready</a>
+            <a >Baby Ready</a>
           </Navbar.Brand>
     			<Navbar.Toggle />
         </Navbar.Header>
-        <Navbar.Form pullRight>
-          {menuOptions}
-        </Navbar.Form >
+        <Navbar.Collapse>
+          <Navbar.Form pullRight>
+            {menuOptions}
+          </Navbar.Form >
+        </Navbar.Collapse>
       </Navbar>
     );
   }  

@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import {Grid, Row, Col, Panel, ListGroup, ListGroupItem} from 'react-bootstrap';
 import './Dashboard.css';
+import PersonalData from './PersonalData'
 
 const titleJournal = (<h3>Journal</h3>);
 const titleUserData = (<h3>User data</h3>);
@@ -34,6 +35,7 @@ export class Dashboard extends React.Component {
 
     return (
       <section>
+        <PersonalData />
         <Grid fluid>
           <Row className="show-grid">
             <Col xs={12} sm={6} md={6}>
@@ -61,7 +63,7 @@ const mapStateToProps = state => {
     const {currentUser} = state.auth;
     return {
         loggedIn: currentUser !== null,
-        username: currentUser ? state.auth.currentUser.username : '',
+        username: currentUser ? currentUser.username : '',
         name: currentUser
             ? `${currentUser.firstName} ${currentUser.lastName}`
             : ''

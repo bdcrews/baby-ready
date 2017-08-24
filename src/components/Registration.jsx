@@ -19,67 +19,76 @@ export class Registration extends React.Component {
     }
 
     render() {
+    let error;
+    if (this.props.error) {
+      error = (
+        <div className="form-error" aria-live="polite">
+          {this.props.error}
+        </div>
+      );
+    }
     return (
-	        <Jumbotron>
-	          <h3>Sign Up</h3>
-	          <form
-	            className="registration-from"
+          <Jumbotron>
+            <h3>Sign Up</h3>
+            {error}
+            <form
+              className="registration-from"
               onSubmit={this.props.handleSubmit(values =>
               this.onSubmit(values)
               )}>
-  					  <FieldGroup
-  					    id="formFirstName"
+              <FieldGroup
+                id="formFirstName"
                 name="firstName"
-  					    type="text"
-  					    label="First name"
-  					    placeholder=""
-  					  />
-  					  <FieldGroup
-  					    id="formLastName"
+                type="text"
+                label="First name"
+                placeholder=""
+              />
+              <FieldGroup
+                id="formLastName"
                 name="lastName"
-  					    type="text"
-  					    label="Last name"
-  					    placeholder=""
-  					  />
-  					  <FieldGroup
-  					    id="formControlsEmail"
+                type="text"
+                label="Last name"
+                placeholder=""
+              />
+              <FieldGroup
+                id="formControlsEmail"
                 name="username"
-  					    type="email"
-  					    label="Email"
-  					    placeholder=""
-	              validate={[required, nonEmpty, isTrimmed, email]}
-  					  />
-  					  <FieldGroup
-  					    id="formControlsPassword"
+                type="email"
+                label="Email"
+                placeholder=""
+                validate={[required, nonEmpty, isTrimmed, email]}
+              />
+              <FieldGroup
+                id="formControlsPassword"
                 name="password"
-  					    label="Password"
-  					    type="password"
-  					    placeholder=""
-	              validate={[required, length({min: 10, max: 72}), isTrimmed]}
-	            />
-  					  <FieldGroup
-  					    id="formControlsConfirmPassword"
+                label="Password"
+                type="password"
+                placeholder=""
+                validate={[required, length({min: 10, max: 72}), isTrimmed]}
+              />
+              <FieldGroup
+                id="formControlsConfirmPassword"
                 name="confirmPassword"
-  					    label="Confirm password"
-  					    type="password"
-  					    placeholder=""
-	              validate={[required, matches('password')]}
-	            />
-  			     	<Button 
-	              type="submit"
-	              disabled={this.props.pristine || this.props.submitting}>
-	              Register
-	            </Button>
-	          </form>
-	        </Jumbotron>
-	    );	
-	}		
+                label="Confirm password"
+                type="password"
+                placeholder=""
+                validate={[required, matches('password')]}
+              />
+               <Button 
+                type="submit"
+                disabled={this.props.pristine || this.props.submitting}>
+                Register
+              </Button>
+            </form>
+          </Jumbotron>
+      );  
+  }    
 }
 
 export default reduxForm({
     form: 'registration',
     onSubmitFail: (errors, dispatch) => {
-    	dispatch(focus('registration', Object.keys(errors)[0]));
+      dispatch(focus('registration', Object.keys(errors)[0]));
     }
 })(Registration);
 

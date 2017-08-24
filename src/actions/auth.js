@@ -1,7 +1,6 @@
 import jwtDecode from 'jwt-decode';
 import {SubmissionError} from 'redux-form';
 
-import {API_BASE_URL} from '../config';
 import {normalizeResponseErrors} from './utils';
 import {saveAuthToken, clearAuthToken} from '../local-storage';
 
@@ -31,7 +30,7 @@ export const login = (username, password) => dispatch => {
     // auth field
     const token = btoa(`${username}:${password}`);
     return (
-        fetch(`${API_BASE_URL}/auth/login`, {
+        fetch(`/auth/login`, {
             method: 'POST',
             headers: {
                 // Provide our username and password as login credentials
@@ -44,7 +43,6 @@ export const login = (username, password) => dispatch => {
             .then(res => res.json())
             .then(({authToken}) => storeAuthInfo(authToken, dispatch))
             .catch(err => {
-                console.log(err);
                 const {code} = err;
                 if (code === 401) {
                     // Could not authenticate, so return a SubmissionError for Redux
@@ -61,7 +59,7 @@ export const login = (username, password) => dispatch => {
 
 export const refreshAuthToken = () => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
-    return fetch(`${API_BASE_URL}/auth/refresh`, {
+    return fetch(`/auth/refresh`, {
         method: 'POST',
         headers: {
             // Provide our existing token as credentials to get a new one

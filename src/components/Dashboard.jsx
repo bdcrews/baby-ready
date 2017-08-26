@@ -3,18 +3,19 @@ import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import {Grid, Row, Col, Panel, ListGroup, ListGroupItem} from 'react-bootstrap';
 import './Dashboard.css';
-import PersonalData from './PersonalData'
+import {fetchUserData} from '../actions/users';
+import {Link} from 'react-router-dom';
 
 const titleJournal = (<h3>Journal</h3>);
 const titleUserData = (<h3>User data</h3>);
 
 export class Dashboard extends React.Component {
-  componentDidMount() {
-      if (!this.props.loggedIn) {
-          return;
-      }
-      //this.props.dispatch(fetchProtectedData());
-  }
+    componentDidMount() {
+        if (!this.props.loggedIn) {
+            return;
+        }
+        this.props.dispatch(fetchUserData());
+    }
 
   clickJournal(event) {
     event.preventDefault();
@@ -33,9 +34,10 @@ export class Dashboard extends React.Component {
         return <Redirect to="/" />;
     }
 
+    let dueDate = this.props.user.dueDate ? this.props.user.dueDate : this.props.user.lmd;
+
     return (
       <section>
-        <PersonalData />
         <Grid fluid>
           <Row className="show-grid">
             <Col xs={12} sm={6} md={6}>
@@ -46,9 +48,10 @@ export class Dashboard extends React.Component {
             <Col xs={12} sm={6} md={6}>
               <Panel header={titleUserData} onClick={(e)=> this.clickUserData(e)}>
                 <ListGroup>
-                  <ListGroupItem>Username: {this.props.username}</ListGroupItem>
+                  <ListGroupItem>Username: {this.props.user.username}</ListGroupItem>
                   <ListGroupItem>Name: {this.props.name}</ListGroupItem>
-                  <ListGroupItem>Protected data: {this.props.protectedData}</ListGroupItem>
+                  <ListGroupItem>Due Date: {this.props.protectedData}</ListGroupItem>
+                  <Link to="/UserData">User Data</Link>
                 </ListGroup>
               </Panel>
             </Col>
@@ -61,11 +64,12 @@ export class Dashboard extends React.Component {
 
 const mapStateToProps = state => {
     const {currentUser} = state.auth;
+    const userData = state.user.data;
     return {
+        user: userData,
         loggedIn: currentUser !== null,
-        username: currentUser ? currentUser.username : '',
-        name: currentUser
-            ? `${currentUser.firstName} ${currentUser.lastName}`
+        name: userData
+            ? `${userData.firstName} ${userData.lastName}`
             : ''
     };
 };

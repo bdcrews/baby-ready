@@ -66,3 +66,36 @@ export const fetchUserData = () => (dispatch, getState) => {
             dispatch(fetchUserDataError(err));
         });
 };
+
+export const UPDATE_USER_DATA_SUCCESS = 'UPDATE_USER_DATA_SUCCESS';
+export const updateUserDataSuccess = data => ({
+    type: UPDATE_USER_DATA_SUCCESS,
+    data
+});
+
+export const UPDATE_USER_DATA_ERROR = 'UPDATE_USER_DATA_ERROR';
+export const updateUserDataError = error => ({
+    type: UPDATE_USER_DATA_ERROR,
+    error
+});
+
+export const updateUserData = (record) => (dispatch, getState) => {
+    const authToken = getState().auth.authToken;
+
+    return fetch(`/users`, {
+        method: 'PUT',
+        headers: {
+            // Provide our auth token as credentials
+            Authorization: `Bearer ${authToken}`
+        },
+        body: JSON.stringify(record)
+    })
+        .then(res => normalizeResponseErrors(res))
+        .then(res => res.json())
+        .then(userdata => {
+            dispatch(updateUserDataSuccess(userdata));
+        })
+        .catch(err => {
+            dispatch(updateUserDataError(err));
+        });
+};

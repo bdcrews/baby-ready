@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {BrowserRouter as Router, Route} from 'react-router-dom';
 import Landing from './Landing'
 import Dashboard from './Dashboard'
+import UserData from './UserData'
 import NavBar from './NavBar'
 import './App.css';
 import {refreshAuthToken} from '../actions/auth';
@@ -52,7 +53,8 @@ export class App extends React.Component {
         <NavBar />
         <div className="container">
 		    <Route exact path="/" component={Landing} />
-		    <Route exact path="/Dashboard" component={Dashboard} />
+        <Route exact path="/Dashboard" component={Dashboard} />
+        <Route exact path="/UserData" component={UserData} />
         </div>
       </div>
     </Router>

@@ -23,7 +23,6 @@ export default class Input extends React.Component {
             error = <HelpBlock className="input-error">{this.props.meta.error}</HelpBlock>;
             validationState = 'error';
         }
-
         return (
             <FormGroup validationState={validationState}>
                 <ControlLabel>{this.props.label}</ControlLabel>

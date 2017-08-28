@@ -1,17 +1,31 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
-import FieldGroup from './FieldGroup'
-import {Button} from 'react-bootstrap';
+import {Button, 
+  Form, 
+  FormGroup, 
+  FormControl, 
+  ControlLabel, 
+  HelpBlock, 
+  Panel,
+  ListGroup,
+  ListGroupItem,
+  InputGroup} from 'react-bootstrap';
 import {reduxForm, focus} from 'redux-form';
 import './UserData.css';
 import {updateUserData} from '../actions/users';
+import {Field} from 'redux-form';
 
 
 export class UserData extends React.Component {
   onSubmit(value) {
-    console.log('onSubmit');
-    return this.props.dispatch(updateUserData(this.props.user));
+    let record = {
+      firstName: value.firstName,
+      lastName: value.lastName,
+      lmd: value.lastMenstration,
+      dueDate: value.dueDate
+    }
+    return this.props.dispatch(updateUserData(record));
   }
 
   render() {
@@ -30,43 +44,107 @@ export class UserData extends React.Component {
         </div>
       );
     }
+
+    console.log(this.props);
+    //let lmdElement = document.getElementById("formControlsLastMenstration");
+ console.log(this.lastMenstration ? this.lastMenstration.value : "undefined");
+
+    let lmd = new Date(this.lastMenstration ? this.lastMenstration.value : this.props.user.lmd);
+
+    //console.log(document.getElementById("formControlsLastMenstration"));
+    //let lmd = new Date(this.props.user.lmd);
+    let estimateDueDate = new Date();
+    estimateDueDate.setDate(lmd.getDate() + 240);
+
+
+    let dueDateFooter = estimateDueDate.toString();
+    /*tempDueDate.getFullYear() + '-' +
+      tempDueDate.getMonth() + '-' +
+      tempDueDate.getDate();
+      */
+
+    let timeDelta = (estimateDueDate.getTime() - Date.now());
+    let daysDelta = Math.round(timeDelta/(1000*60*60*24));
+    console.log(estimateDueDate);
+    console.log(daysDelta);
+
+
     return (
-	      <form className='userDataForm' onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
-          <FieldGroup
-            id="formControlsUserName"
+
+
+
+    <Form inline className='userDataForm' onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
+      <FormGroup controlId="formControlsUserName">
+        <ControlLabel>User Name</ControlLabel>
+        {' '}
+        <FormControl componentClass={Field} component="input" 
             name="userName"
             type="email"
             label="User Name"
-          />
-          <FieldGroup
-            id="formControlsFirstName"
+            readOnly
+        />
+      </FormGroup>
+      <br /><br />
+      <FormGroup controlId="formControlsFirstName">
+        <ControlLabel>First name</ControlLabel>
+        {' '}         
+        <FormControl componentClass={Field} component="input"  
             name="firstName"
             type="text"
-            label="First name"
             placeholder="first name"
-          />
-          <FieldGroup
-            id="formControlsLastName"
+        />
+      </FormGroup>
+      <br /><br />
+      <FormGroup controlId="formControlsLastName">
+        <ControlLabel>Last name</ControlLabel>
+        {' '}         
+        <FormControl componentClass={Field} component="input"  
             name="lastName"
             type="text"
-            label="Last name"
             placeholder="last name"
-          />
-          <FieldGroup
-            id="formControlsLastMenstration"
-            name="lastMenstration"
-            type="date"
-            label="Date of last menstration"
-          />
-	        <FieldGroup
-	          id="formControlsDueDate"
-	          name="dueDate"
-	          label="Due Date"
-	          type="date"
-	        />
-          {error}
-	        <Button disabled={this.props.pristine || this.props.submitting} className="userDataSubmitBtn" type="submit">Submit</Button>
-	      </form>
+        />
+      </FormGroup>
+      <br /><br />
+
+      <Panel header="Due date calculator" footer={dueDateFooter}>
+        <ListGroup fill>
+          <ListGroupItem>
+            <FormGroup controlId="formControlsLastMenstration">
+              <ControlLabel>Date of last menstration</ControlLabel>
+              {' '}
+              <InputGroup>         
+                <FormControl componentClass={Field} component="input" 
+                    name="lastMenstration"
+                    type="date"
+                    inputRef={(ref) => {this.lastMenstration = ref}}
+                />
+              <InputGroup.Addon>{estimateDueDate.toString()}</InputGroup.Addon>
+              </InputGroup>
+              <HelpBlock>This is used to calculate an estimated due date.  Once you get a more accurate estimate from your doctor, update the due date field below.  The estimated due date is determined by adding 40 weeks to the first day of your last menstrual period (assuming a 28 day cycle).</HelpBlock>
+            </FormGroup>
+          </ListGroupItem>
+          <ListGroupItem>
+            <FormGroup controlId="formControlsDueDate">
+              <ControlLabel>Due Date</ControlLabel>
+              {' '}         
+              <FormControl componentClass={Field} component="input" 
+                  name="dueDate"
+                  type="date"
+              />
+              <HelpBlock>This is the more accurate due date given by your doctor.  If this due date is set, the estimated due date calculated above will be ignored.</HelpBlock>
+            </FormGroup>
+          </ListGroupItem>
+        </ListGroup>
+      </Panel>
+      <Button
+        type="submit"
+        disabled={this.props.pristine || this.props.submitting}>
+        Update
+      </Button>
+    </Form>
+
+
+
     );
 	}
 }
@@ -80,9 +158,10 @@ const mapStateToProps = state => {
           userName: state.user.data.username,
           firstName: state.user.data.firstName,
           lastName: state.user.data.lastName,
-          lastMenstration: state.user.data.lmd,
-          dueDate: state.user.data.dueDate
-        }
+          lastMenstration: String(state.user.data.lmd).split('T')[0],
+          dueDate: String(state.user.data.dueDate).split('T')[0]
+        },
+        userid: state.user.data.id
     };
 };
 

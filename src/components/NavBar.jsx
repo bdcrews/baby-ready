@@ -6,7 +6,7 @@ import LoginForm from './LoginForm'
 import {setCurrentUser, setAuthToken} from '../actions/auth';
 import {clearAuthToken} from '../local-storage';
 import {Redirect, Link} from 'react-router-dom';
-//import {LinkContainer} from 'react-router-bootstrap';
+import {LinkContainer} from 'react-router-bootstrap';
 //<LinkContainer to={{path: "/UserData"}}><MenuItem>User data</MenuItem></LinkContainer>
 
 
@@ -33,7 +33,7 @@ export class NavBar extends React.Component {
         <NavDropdown title={this.props.name} eventKey={2} id="basic-nav-dropdown" pullRight>
           <MenuItem header>Account</MenuItem>
           <MenuItem divider />
-          <MenuItem eventKey={2.1} onClick={() => this.linkToUserData()}>User data</MenuItem>
+          <LinkContainer to="/UserData"><MenuItem eventKey={2.1} >User Name</MenuItem></LinkContainer>
           <MenuItem divider />
           <MenuItem eventKey={2.2} onClick={() => this.logOut()}>Logout</MenuItem>
         </NavDropdown>

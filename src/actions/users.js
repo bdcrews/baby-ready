@@ -81,12 +81,14 @@ export const updateUserDataError = error => ({
 
 export const updateUserData = (record) => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
-
-    return fetch(`/users`, {
+console.log(record);
+    return fetch(`/users/` + getState().user.data.id, {
         method: 'PUT',
         headers: {
             // Provide our auth token as credentials
-            Authorization: `Bearer ${authToken}`
+            Authorization: `Bearer ${authToken}`,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
         },
         body: JSON.stringify(record)
     })

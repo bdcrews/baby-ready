@@ -5,9 +5,7 @@ import './NavBar.css';
 import LoginForm from './LoginForm'
 import {setCurrentUser, setAuthToken} from '../actions/auth';
 import {clearAuthToken} from '../local-storage';
-import {Redirect, Link} from 'react-router-dom';
 import {LinkContainer} from 'react-router-bootstrap';
-//<LinkContainer to={{path: "/UserData"}}><MenuItem>User data</MenuItem></LinkContainer>
 
 
 export class NavBar extends React.Component {

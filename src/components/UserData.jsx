@@ -10,11 +10,15 @@ import {Button,
   Panel,
   ListGroup,
   ListGroupItem,
-  InputGroup} from 'react-bootstrap';
+  InputGroup,
+  ButtonGroup,
+  Col} from 'react-bootstrap';
 import {reduxForm, focus} from 'redux-form';
 import './UserData.css';
 import {updateUserData} from '../actions/users';
 import {Field} from 'redux-form';
+import moment from 'moment';
+import {LinkContainer} from 'react-router-bootstrap';
 
 
 export class UserData extends React.Component {
@@ -28,13 +32,21 @@ export class UserData extends React.Component {
     return this.props.dispatch(updateUserData(record));
   }
 
-  render() {
+  handleLmdChange(event) {
+    console.log(event.target.value);
+  }
 
+  createFooter(lmd, dueDate) {
+    if(dueDate !== '') { return('Due date: ' + moment(dueDate).format("dddd, MMMM Do, YYYY"));}
+    if(lmd !== ''    ) { return('Estimated due date: ' + moment(lmd).add(240,'days').format("dddd, MMMM Do, YYYY"));}
+    return('Enter a valid last menstration date or due date.');
+  }
+
+  render() {
     //Only visible to logged in users
     if (!this.props.loggedIn) {
         return <Redirect to="/" />;
     }
-
 
     let error;
     if (this.props.error) {
@@ -45,112 +57,121 @@ export class UserData extends React.Component {
       );
     }
 
-    console.log(this.props);
-    //let lmdElement = document.getElementById("formControlsLastMenstration");
- console.log(this.lastMenstration ? this.lastMenstration.value : "undefined");
-
-    let lmd = new Date(this.lastMenstration ? this.lastMenstration.value : this.props.user.lmd);
-
-    //console.log(document.getElementById("formControlsLastMenstration"));
-    //let lmd = new Date(this.props.user.lmd);
-    let estimateDueDate = new Date();
-    estimateDueDate.setDate(lmd.getDate() + 240);
-
-
-    let dueDateFooter = estimateDueDate.toString();
-    /*tempDueDate.getFullYear() + '-' +
-      tempDueDate.getMonth() + '-' +
-      tempDueDate.getDate();
-      */
-
-    let timeDelta = (estimateDueDate.getTime() - Date.now());
-    let daysDelta = Math.round(timeDelta/(1000*60*60*24));
-    console.log(estimateDueDate);
-    console.log(daysDelta);
-
-
     return (
-
-
-
-    <Form inline className='userDataForm' onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}>
+    <Form 
+      className='userDataForm' 
+      onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}
+      onReset={this.props.reset}
+      horizontal>
+      {error}
       <FormGroup controlId="formControlsUserName">
-        <ControlLabel>User Name</ControlLabel>
-        {' '}
-        <FormControl componentClass={Field} component="input" 
-            name="userName"
-            type="email"
-            label="User Name"
-            readOnly
-        />
+        <Col componentClass={ControlLabel} sm={2}>
+          User Name
+        </Col>
+        <Col sm={10}> 
+          <FormControl componentClass={Field} component="input" 
+              name="userName"
+              type="email"
+              label="User Name"
+              readOnly
+          />
+        </Col> 
       </FormGroup>
-      <br /><br />
       <FormGroup controlId="formControlsFirstName">
-        <ControlLabel>First name</ControlLabel>
-        {' '}         
-        <FormControl componentClass={Field} component="input"  
-            name="firstName"
-            type="text"
-            placeholder="first name"
-        />
+        <Col componentClass={ControlLabel} sm={2}>
+          First name
+        </Col> 
+        <Col sm={10}>      
+          <FormControl componentClass={Field} component="input"  
+              name="firstName"
+              type="text"
+              placeholder="first name"
+          />
+        </Col> 
       </FormGroup>
-      <br /><br />
       <FormGroup controlId="formControlsLastName">
-        <ControlLabel>Last name</ControlLabel>
-        {' '}         
-        <FormControl componentClass={Field} component="input"  
-            name="lastName"
-            type="text"
-            placeholder="last name"
-        />
+        <Col componentClass={ControlLabel} sm={2}>
+          Last name
+        </Col>    
+        <Col sm={10}>  
+          <FormControl componentClass={Field} component="input"  
+              name="lastName"
+              type="text"
+              placeholder="last name"
+          />
+        </Col> 
       </FormGroup>
-      <br /><br />
-
-      <Panel header="Due date calculator" footer={dueDateFooter}>
+      <Panel header="Due date calculator" footer={this.createFooter(this.props.lastMenstration, this.props.dueDate)}>
         <ListGroup fill>
           <ListGroupItem>
             <FormGroup controlId="formControlsLastMenstration">
-              <ControlLabel>Date of last menstration</ControlLabel>
-              {' '}
-              <InputGroup>         
-                <FormControl componentClass={Field} component="input" 
-                    name="lastMenstration"
-                    type="date"
-                    inputRef={(ref) => {this.lastMenstration = ref}}
-                />
-              <InputGroup.Addon>{estimateDueDate.toString()}</InputGroup.Addon>
-              </InputGroup>
-              <HelpBlock>This is used to calculate an estimated due date.  Once you get a more accurate estimate from your doctor, update the due date field below.  The estimated due date is determined by adding 40 weeks to the first day of your last menstrual period (assuming a 28 day cycle).</HelpBlock>
+              <Col componentClass={ControlLabel} sm={3}>
+                Last menstration date
+              </Col>
+              <Col sm={9}> 
+                <InputGroup>         
+                  <FormControl componentClass={Field} component="input" 
+                      name="lastMenstration"
+                      type="date"
+                      onChange={this.handleLmdChange.bind(this)}
+                  />
+                </InputGroup>
+              </Col>
+              <Col sm={12}>
+                <HelpBlock>This is used to calculate an estimated due date.  Once you get a more accurate date from your doctor, update the due date field below.  The estimated due date is determined by adding 40 weeks to the first day of your last menstrual period (assuming a 28 day cycle).</HelpBlock>
+              </Col>
             </FormGroup>
           </ListGroupItem>
           <ListGroupItem>
             <FormGroup controlId="formControlsDueDate">
-              <ControlLabel>Due Date</ControlLabel>
-              {' '}         
-              <FormControl componentClass={Field} component="input" 
-                  name="dueDate"
-                  type="date"
-              />
-              <HelpBlock>This is the more accurate due date given by your doctor.  If this due date is set, the estimated due date calculated above will be ignored.</HelpBlock>
+              <Col componentClass={ControlLabel} sm={3}>
+                Due date from doctor
+              </Col>   
+              <Col sm={9}> 
+                <InputGroup> 
+                  <FormControl componentClass={Field} component="input" 
+                      name="dueDate"
+                      type="date"
+                  />
+                </InputGroup>
+              </Col> 
+              <Col sm={12}>
+                <HelpBlock>This is the more accurate due date given by your doctor.<br />Note: If this due date is set, the app will ignore the estimated due date (calculated using the date of last menstration above).</HelpBlock>
+              </Col>
             </FormGroup>
           </ListGroupItem>
         </ListGroup>
       </Panel>
-      <Button
-        type="submit"
-        disabled={this.props.pristine || this.props.submitting}>
-        Update
-      </Button>
+      <ButtonGroup >
+        <LinkContainer to="/Dashboard">
+          <Button
+            type="button"
+            disabled={this.props.submitting}
+            bsSize="lg">
+            Return
+          </Button>
+        </LinkContainer>
+        <Button
+          type="reset"
+          disabled={this.props.pristine || this.props.submitting}
+          bsSize="lg">
+          Reset
+        </Button>
+        <Button
+          type="submit"
+          disabled={this.props.pristine || this.props.submitting}
+          bsSize="lg">
+          Update
+        </Button>
+      </ButtonGroup>
     </Form>
-
-
-
     );
 	}
 }
 
 const mapStateToProps = state => {
     const {currentUser} = state.auth;
+    const {userData} = state.form;
     return {
         loggedIn: currentUser !== null,
         user: state.user.data,
@@ -161,7 +182,9 @@ const mapStateToProps = state => {
           lastMenstration: String(state.user.data.lmd).split('T')[0],
           dueDate: String(state.user.data.dueDate).split('T')[0]
         },
-        userid: state.user.data.id
+        userid: state.user.data.id,
+        dueDate: userData ? userData.values.dueDate : '',
+        lastMenstration: userData ? userData.values.lastMenstration : ''
     };
 };
 

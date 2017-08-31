@@ -31,7 +31,7 @@ export class NavBar extends React.Component {
         <NavDropdown title={this.props.name} eventKey={2} id="basic-nav-dropdown" pullRight>
           <MenuItem header>Account</MenuItem>
           <MenuItem divider />
-          <LinkContainer to="/UserData"><MenuItem eventKey={2.1} >User Name</MenuItem></LinkContainer>
+          <LinkContainer to="/UserData"><MenuItem eventKey={2.1} >User data</MenuItem></LinkContainer>
           <MenuItem divider />
           <MenuItem eventKey={2.2} onClick={() => this.logOut()}>Logout</MenuItem>
         </NavDropdown>

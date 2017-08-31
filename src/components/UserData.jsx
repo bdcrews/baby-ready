@@ -20,7 +20,6 @@ import {Field} from 'redux-form';
 import moment from 'moment';
 import {LinkContainer} from 'react-router-bootstrap';
 
-
 export class UserData extends React.Component {
   onSubmit(value) {
     let record = {
@@ -36,9 +35,11 @@ export class UserData extends React.Component {
     console.log(event.target.value);
   }
 
-  createFooter(lmd, dueDate) {
-    if(dueDate !== '') { return('Due date: ' + moment(dueDate).format("dddd, MMMM Do, YYYY"));}
-    if(lmd !== ''    ) { return('Estimated due date: ' + moment(lmd).add(240,'days').format("dddd, MMMM Do, YYYY"));}
+  createFooter() {
+    let lmd = this.props.lastMenstration;
+    let dd = this.props.dueDate;
+    if(dd !== '' ) { return('Due date: ' + moment(dd).format("dddd, MMMM Do, YYYY"));}
+    if(lmd !== '') { return('Estimated due date: ' + moment(lmd).add(240,'days').format("dddd, MMMM Do, YYYY"));}
     return('Enter a valid last menstration date or due date.');
   }
 
@@ -101,7 +102,7 @@ export class UserData extends React.Component {
           />
         </Col> 
       </FormGroup>
-      <Panel header="Due date calculator" footer={this.createFooter(this.props.lastMenstration, this.props.dueDate)}>
+      <Panel header="Due date calculator" footer={this.createFooter()}>
         <ListGroup fill>
           <ListGroupItem>
             <FormGroup controlId="formControlsLastMenstration">
@@ -148,7 +149,7 @@ export class UserData extends React.Component {
             type="button"
             disabled={this.props.submitting}
             bsSize="lg">
-            Return
+            Cancel
           </Button>
         </LinkContainer>
         <Button
@@ -160,7 +161,8 @@ export class UserData extends React.Component {
         <Button
           type="submit"
           disabled={this.props.pristine || this.props.submitting}
-          bsSize="lg">
+          bsSize="lg"
+          bsStyle="primary">
           Update
         </Button>
       </ButtonGroup>
@@ -183,8 +185,12 @@ const mapStateToProps = state => {
           dueDate: String(state.user.data.dueDate).split('T')[0]
         },
         userid: state.user.data.id,
-        dueDate: userData ? userData.values.dueDate : '',
-        lastMenstration: userData ? userData.values.lastMenstration : ''
+        dueDate: userData 
+            ? userData.values.dueDate 
+            : '',
+        lastMenstration: userData 
+            ? userData.values.lastMenstration 
+            : ''
     };
 };
 

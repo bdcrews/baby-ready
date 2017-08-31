@@ -1,14 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
-import {Grid, Row, Col, Panel, ListGroup, ListGroupItem, Button} from 'react-bootstrap';
+import {Grid, Row, Col, Panel} from 'react-bootstrap';
 import './Dashboard.css';
 import {fetchUserData} from '../actions/users';
-import {Link} from 'react-router-dom';
-import {LinkContainer} from 'react-router-bootstrap';
+import SmallUserData from './SmallUserData'
 
 const titleJournal = (<h3>Journal</h3>);
-const titleUserData = (<h3>User data</h3>);
 
 export class Dashboard extends React.Component {
     componentDidMount() {
@@ -48,16 +46,7 @@ export class Dashboard extends React.Component {
               </Panel>
             </Col>
             <Col xs={12} sm={6} md={6}>
-            <LinkContainer to="/UserData">
-              <Panel header={titleUserData}>
-                <ListGroup>
-                  <ListGroupItem>Username: {this.props.user.username}</ListGroupItem>
-                  <ListGroupItem>Name: {this.props.name}</ListGroupItem>
-                  <ListGroupItem>Due Date: {this.props.protectedData}</ListGroupItem>
-                  <Link to="/UserData">User Data</Link>
-                </ListGroup>
-              </Panel>
-            </LinkContainer>
+              <SmallUserData />
             </Col>
           </Row>
         </Grid>

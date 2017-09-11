@@ -5,6 +5,7 @@ import Landing from './Landing'
 import Dashboard from './Dashboard'
 import UserData from './UserData'
 import NavBar from './NavBar'
+import PopUp from './PopUp'
 import './App.css';
 import {refreshAuthToken} from '../actions/auth';
 
@@ -51,6 +52,7 @@ export class App extends React.Component {
     <Router>
       <div className="App">
         <NavBar />
+        <PopUp />
         <div className="container">
 		    <Route exact path="/" component={Landing} />
         <Route exact path="/Dashboard" component={Dashboard} />

@@ -15,6 +15,7 @@ import {Button,
   Col} from 'react-bootstrap';
 import {reduxForm, focus} from 'redux-form';
 import './UserData.css';
+import {openPopUp} from '../actions/pop-up';
 import {updateUserData} from '../actions/users';
 import {Field} from 'redux-form';
 import moment from 'moment';
@@ -22,6 +23,15 @@ import {LinkContainer} from 'react-router-bootstrap';
 
 export class UserData extends React.Component {
   onSubmit(value) {
+
+    let popup = {
+      status: 'updating',
+      title: 'Update Results',
+      description: 'Please wait. Updating user data'
+    }
+    this.props.dispatch(openPopUp(popup));
+
+    // dispatch to update the api
     let record = {
       firstName: value.firstName,
       lastName: value.lastName,
@@ -29,10 +39,6 @@ export class UserData extends React.Component {
       dueDate: value.dueDate
     }
     return this.props.dispatch(updateUserData(record));
-  }
-
-  handleLmdChange(event) {
-    console.log(event.target.value);
   }
 
   createFooter() {
@@ -114,7 +120,6 @@ export class UserData extends React.Component {
                   <FormControl componentClass={Field} component="input" 
                       name="lastMenstration"
                       type="date"
-                      onChange={this.handleLmdChange.bind(this)}
                   />
                 </InputGroup>
               </Col>

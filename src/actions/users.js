@@ -1,6 +1,8 @@
 import {SubmissionError} from 'redux-form';
 
 import {normalizeResponseErrors} from './utils';
+import {openPopUp} from '../actions/pop-up';
+
 
 export const registerUser = user => dispatch => {
     return fetch(`/users`, {
@@ -12,6 +14,7 @@ export const registerUser = user => dispatch => {
     })
         .then(res => normalizeResponseErrors(res))
         .then(res => res.json())
+     //   .then(data => {dispatch(fetchUserDataSuccess(data))})
         .catch(err => {
             const {reason, message, location} = err;
             if (reason === 'ValidationError') {
@@ -50,6 +53,7 @@ export const fetchUserData = () => (dispatch, getState) => {
         .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
         .join('&');
 
+     //   dispatch(fetchUserDataAttempt({title, discription,}));
     return fetch(`/users?` + query, {
         method: 'GET',
         headers: {
@@ -81,7 +85,6 @@ export const updateUserDataError = error => ({
 
 export const updateUserData = (record) => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
-console.log(record);
     return fetch(`/users/` + getState().user.data.id, {
         method: 'PUT',
         headers: {
@@ -96,6 +99,13 @@ console.log(record);
         .then(res => res.json())
         .then(userdata => {
             dispatch(updateUserDataSuccess(userdata));
+        })
+        .then(() => {
+            dispatch(openPopUp({
+              status: 'Update Successful',
+              title: 'Update Results',
+              description: 'Update Successful'
+            }));
         })
         .catch(err => {
             dispatch(updateUserDataError(err));

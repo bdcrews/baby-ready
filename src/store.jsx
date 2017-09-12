@@ -5,6 +5,7 @@ import {loadAuthToken} from './local-storage';
 import authReducer from './reducers/auth';
 import userReducer from './reducers/user';
 import popUpReducer from './reducers/pop-up';
+import journalReducer from './reducers/journal';
 import {setAuthToken} from './actions/auth';
 
 const store = createStore(
@@ -12,7 +13,8 @@ const store = createStore(
         form: formReducer,
         auth: authReducer,
         user: userReducer,
-        popup: popUpReducer
+        popup: popUpReducer,
+        journal: journalReducer
     }),
     applyMiddleware(thunk)
 );

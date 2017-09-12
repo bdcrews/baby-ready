@@ -32,6 +32,7 @@ export class NavBar extends React.Component {
           <MenuItem header>Account</MenuItem>
           <MenuItem divider />
           <LinkContainer to="/UserData"><MenuItem eventKey={2.1} >User data</MenuItem></LinkContainer>
+          <LinkContainer to="/JournalNew"><MenuItem eventKey={2.2} >New journal page</MenuItem></LinkContainer>
           <MenuItem divider />
           <MenuItem eventKey={2.2} onClick={() => this.logOut()}>Logout</MenuItem>
         </NavDropdown>

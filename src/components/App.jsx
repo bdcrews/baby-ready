@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 import Landing from './Landing'
 import Dashboard from './Dashboard'
 import UserData from './UserData'
+import JournalNew from './JournalNew'
 import NavBar from './NavBar'
 import PopUp from './PopUp'
 import './App.css';
@@ -54,9 +55,10 @@ export class App extends React.Component {
         <NavBar />
         <PopUp />
         <div className="container">
-		    <Route exact path="/" component={Landing} />
-        <Route exact path="/Dashboard" component={Dashboard} />
-        <Route exact path="/UserData" component={UserData} />
+  		    <Route exact path="/" component={Landing} />
+          <Route exact path="/Dashboard" component={Dashboard} />
+          <Route exact path="/UserData" component={UserData} />
+          <Route exact path="/JournalNew" component={JournalNew} />
         </div>
       </div>
     </Router>

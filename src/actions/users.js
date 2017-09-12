@@ -43,8 +43,6 @@ export const fetchUserDataError = error => ({
 export const fetchUserData = () => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
 
-
-
     var params = {
         username: getState().auth.currentUser.username
     };

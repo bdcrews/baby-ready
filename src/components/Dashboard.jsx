@@ -4,27 +4,17 @@ import {Redirect} from 'react-router-dom';
 import {Grid, Row, Col, Panel} from 'react-bootstrap';
 import './Dashboard.css';
 import {fetchUserData} from '../actions/users';
-import SmallUserData from './SmallUserData'
+import SmallUserData from './SmallUserData';
+import SmallJournal from './SmallJournal';
 
 const titleJournal = (<h3>Journal</h3>);
 
 export class Dashboard extends React.Component {
-    componentDidMount() {
-        if (!this.props.loggedIn) {
-            return;
-        }
-        this.props.dispatch(fetchUserData());
+  componentDidMount() {
+    if (!this.props.loggedIn) {
+      return;
     }
-
-  clickJournal(event) {
-    event.preventDefault();
-    console.log("clickJournal");
-    //this.props.dispatch();
-  }
-  clickUserData(event) {
-    event.preventDefault();
-    //this.props.dispatch();
-    console.log("clickUserData");
+    this.props.dispatch(fetchUserData());
   }
 
   render() {
@@ -41,9 +31,7 @@ export class Dashboard extends React.Component {
         <Grid fluid>
           <Row className="show-grid">
             <Col xs={12} sm={6} md={6}>
-              <Panel header={titleJournal} onClick={(e)=> this.clickJournal(e)}>
-                Journal
-              </Panel>
+              <SmallJournal />
             </Col>
             <Col xs={12} sm={6} md={6}>
               <SmallUserData />

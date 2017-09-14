@@ -6,7 +6,8 @@ import {
 const initialState = {
     status: 'closed',
     title: '',
-    description: ''
+    description: '',
+    returnTo: '/Dashboard'
 };
 
 export default function reducer(state = initialState, action) {
@@ -14,7 +15,11 @@ export default function reducer(state = initialState, action) {
         return Object.assign({}, state, action.popup);
     }
     if (action.type === CLOSE_POP_UP) {
-        return Object.assign({}, state, initialState);
+        return Object.assign({}, state, {
+            status: 'closed',
+            title: '',
+            description: ''
+        });
     }
     return state;
 }

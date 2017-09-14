@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Navbar, NavDropdown, MenuItem} from 'react-bootstrap';
+import {Navbar, NavDropdown, MenuItem, Nav} from 'react-bootstrap';
 import './NavBar.css';
 import LoginForm from './LoginForm'
 import {setCurrentUser, setAuthToken} from '../actions/auth';
@@ -23,19 +23,24 @@ export class NavBar extends React.Component {
     let menuOptions;
     if(!this.props.loggedIn) {
     	menuOptions = (
+        <Navbar.Form pullRight>
         <LoginForm />
+        </Navbar.Form >
       );
     }
     else {
     	menuOptions = (
+        <Nav pullRight>
         <NavDropdown title={this.props.name} eventKey={2} id="basic-nav-dropdown" pullRight>
           <MenuItem header>Account</MenuItem>
           <MenuItem divider />
-          <LinkContainer to="/UserData"><MenuItem eventKey={2.1} >User data</MenuItem></LinkContainer>
-          <LinkContainer to="/JournalNew"><MenuItem eventKey={2.2} >New journal page</MenuItem></LinkContainer>
+          <LinkContainer to="/Dashboard"><MenuItem eventKey={2.1} >Dashboard</MenuItem></LinkContainer>
+          <LinkContainer to="/UserData"><MenuItem eventKey={2.2} >User data</MenuItem></LinkContainer>
+          <LinkContainer to="/JournalNew"><MenuItem eventKey={2.3} >New journal page</MenuItem></LinkContainer>
           <MenuItem divider />
           <MenuItem eventKey={2.2} onClick={() => this.logOut()}>Logout</MenuItem>
         </NavDropdown>
+        </Nav>
       );
     }
 
@@ -48,9 +53,7 @@ export class NavBar extends React.Component {
     			<Navbar.Toggle />
         </Navbar.Header>
         <Navbar.Collapse>
-          <Navbar.Form pullRight>
-            {menuOptions}
-          </Navbar.Form >
+          {menuOptions}
         </Navbar.Collapse>
       </Navbar>
     );

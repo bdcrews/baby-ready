@@ -15,7 +15,8 @@ export class PopUp extends React.Component {
 
   render() {
     if (this.props.status==='closed') {
-        return <Redirect to="/Dashboard" />;
+        console.log(this.props.returnTo);
+        return <Redirect to={this.props.returnTo} />;
     }
 
     return(
@@ -47,7 +48,8 @@ const mapStateToProps = state => {
     return {
         status: state.popup.status,
         title: state.popup.title,
-        description: state.popup.description
+        description: state.popup.description,
+        returnTo: state.popup.returnTo
     };
 };
 

@@ -27,7 +27,8 @@ export class UserData extends React.Component {
     let popup = {
       status: 'updating',
       title: 'Update Results',
-      description: 'Please wait. Updating user data'
+      description: 'Please wait. Updating user data',
+      returnTo: '/Dashboard'
     }
     this.props.dispatch(openPopUp(popup));
 

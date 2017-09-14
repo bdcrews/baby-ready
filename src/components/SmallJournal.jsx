@@ -6,7 +6,6 @@ import {Panel,
   Button,
   ButtonGroup
   } from 'react-bootstrap';
-import moment from 'moment';
 import {LinkContainer} from 'react-router-bootstrap';
 
 const titlePanel = (<h3>Journal</h3>);

@@ -1,13 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
-import {Grid, Row, Col, Panel} from 'react-bootstrap';
+import {Grid, Row, Col} from 'react-bootstrap';
 import './Dashboard.css';
 import {fetchUserData} from '../actions/users';
 import SmallUserData from './SmallUserData';
 import SmallJournal from './SmallJournal';
-
-const titleJournal = (<h3>Journal</h3>);
 
 export class Dashboard extends React.Component {
   componentDidMount() {
@@ -22,9 +20,6 @@ export class Dashboard extends React.Component {
     if (!this.props.loggedIn) {
         return <Redirect to="/" />;
     }
-
-   // let dueDate = this.props.user.dueDate ? this.props.user.dueDate : 
-   //                 (this.props.user.lmd ? this.props.user.lmd;
 
     return (
       <section>

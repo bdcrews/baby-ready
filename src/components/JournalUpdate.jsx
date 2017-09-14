@@ -12,11 +12,10 @@ import {Button,
   Accordion} from 'react-bootstrap';
 import {reduxForm, focus} from 'redux-form';
 import {openPopUp} from '../actions/pop-up';
-import {newJournal} from '../actions/journal';
+import {closeUpdateJournalPage, updateJournal} from '../actions/journal';
 import {Field} from 'redux-form';
-import {LinkContainer} from 'react-router-bootstrap';
 
-export class JournalNew extends React.Component {
+export class JournalUpdate extends React.Component {
   onSubmit(value) {
     let popup = {
       status: 'updating',
@@ -38,13 +37,14 @@ export class JournalNew extends React.Component {
       systolic: value.systolic,
       diastolic: value.diastolic
     }
-    return this.props.dispatch(newJournal(record));
+    console.log(this.props.journal);
+    return this.props.dispatch(updateJournal( this.props.journal.singleJournal.id,record));
   }
 
   render() {
     //Only visible to logged in users
     if (!this.props.loggedIn) {
-        return <Redirect to="/" />;
+        return <Redirect to='/' />;
     }
 
     let error;
@@ -158,14 +158,13 @@ export class JournalNew extends React.Component {
       </Accordion>
 
       <ButtonGroup >
-        <LinkContainer to="/Dashboard">
           <Button
             type="button"
             disabled={this.props.submitting}
-            bsSize="lg">
+            bsSize="lg"
+            onClick={() => this.props.dispatch(closeUpdateJournalPage())}>
             Cancel
           </Button>
-        </LinkContainer>
         <Button
           type="reset"
           disabled={this.props.pristine || this.props.submitting}
@@ -177,7 +176,7 @@ export class JournalNew extends React.Component {
           disabled={this.props.pristine || this.props.submitting}
           bsSize="lg"
           bsStyle="primary">
-          Create
+          Update
         </Button>
       </ButtonGroup>
     </Form>
@@ -191,28 +190,28 @@ const mapStateToProps = state => {
         loggedIn: currentUser !== null,
         user: state.user.data,
         initialValues: {
-//          title: "testtitle",
-//          journalText: "testjournaltext",
-          timestamp: new Date().toJSON().slice(0,19),
-//          doctorCheckbox: true,
-//          importantCheckbox: true
-//          weight: 
-//          systolic: 
-//          diastolic: 
+        title: state.journal.singleJournal ? state.journal.singleJournal.title : '',
+        journalText: state.journal.singleJournal ? state.journal.singleJournal.journalText : '',
+        timestamp: state.journal.singleJournal ? state.journal.singleJournal.timestamp : '',
+        doctorCheckbox: state.journal.singleJournal ? state.journal.singleJournal.doctorCheckbox : '',
+        weight: state.journal.singleJournal ? state.journal.singleJournal.weight : '',
+        systolic: state.journal.singleJournal ? state.journal.singleJournal.systolic : '',
+        diastolic: state.journal.singleJournal ? state.journal.singleJournal.diastolic : ''
         },
-        username: state.user.data.username
+        username: state.user.data.username,
+        journal: state.journal
     };
 };
 
-const reduxJournalNew = reduxForm({
-    form: 'JournalNew',
+const reduxJournalUpdate = reduxForm({
+    form: 'JournalUpdate',
     onSubmitFail: (errors, dispatch) => {
-      dispatch(focus('JournalNew', Object.keys(errors)[0]));
+      dispatch(focus('JournalUpdate', Object.keys(errors)[0]));
     }
-  })(JournalNew)
+  })(JournalUpdate)
 
-const ConnectedJournalNew = connect(
+const ConnectedJournalUpdate = connect(
   mapStateToProps
-)(reduxJournalNew); 
+)(reduxJournalUpdate); 
 
-export default ConnectedJournalNew;
+export default ConnectedJournalUpdate;

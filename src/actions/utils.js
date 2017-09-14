@@ -20,3 +20,23 @@ export const normalizeResponseErrors = res => {
     }
     return res;
 };
+
+
+const queryString = (query) => {
+   return Object.keys(query)
+        .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(query[k]))
+        .join('&');
+}
+
+export const getFromServer = (url, query, authToken) => {
+    const finalUrl = query ? url + '?' + queryString(query) : url;
+    return fetch(finalUrl, {
+        method: 'GET',
+        headers: {
+            // Provide our auth token as credentials
+            Authorization: `Bearer ${authToken}`
+        }
+    })
+    .then(res => normalizeResponseErrors(res))
+    .then(res => res.json());
+}

@@ -102,7 +102,8 @@ export const updateUserData = (record) => (dispatch, getState) => {
             dispatch(openPopUp({
               status: 'Update Successful',
               title: 'Update Results',
-              description: 'Update Successful'
+              description: 'Update Successful',
+              returnTo: '/Dashboard'
             }));
         })
         .catch(err => {

@@ -5,6 +5,7 @@ import Landing from './Landing'
 import Dashboard from './Dashboard'
 import UserData from './UserData'
 import JournalNew from './JournalNew'
+import Journal from './Journal'
 import NavBar from './NavBar'
 import PopUp from './PopUp'
 import './App.css';
@@ -59,6 +60,7 @@ export class App extends React.Component {
           <Route exact path="/Dashboard" component={Dashboard} />
           <Route exact path="/UserData" component={UserData} />
           <Route exact path="/JournalNew" component={JournalNew} />
+          <Route exact path="/Journal" component={Journal} />
         </div>
       </div>
     </Router>

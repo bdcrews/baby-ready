@@ -12,7 +12,7 @@ import {Button,
   Accordion} from 'react-bootstrap';
 import {reduxForm, focus} from 'redux-form';
 import {openPopUp} from '../actions/pop-up';
-import {newJournal} from '../actions/journal';
+import {newJournal, closeNewJournalPage} from '../actions/journal';
 import {Field} from 'redux-form';
 import {LinkContainer} from 'react-router-bootstrap';
 
@@ -158,14 +158,13 @@ export class JournalNew extends React.Component {
       </Accordion>
 
       <ButtonGroup >
-        <LinkContainer to="/Dashboard">
           <Button
             type="button"
             disabled={this.props.submitting}
-            bsSize="lg">
-            Cancel
+            bsSize="lg"
+            onClick={()=>{this.props.dispatch(closeNewJournalPage())}}>
+            Close
           </Button>
-        </LinkContainer>
         <Button
           type="reset"
           disabled={this.props.pristine || this.props.submitting}
@@ -182,7 +181,7 @@ export class JournalNew extends React.Component {
       </ButtonGroup>
     </Form>
     );
-	}
+  }
 }
 
 const mapStateToProps = state => {

@@ -23,24 +23,14 @@ export const fetchJournalError = error => ({
 export const fetchJournal = () => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
 
-    const filter = {
-        username: getState().auth.currentUser.username
-    };
-/*
-    const location = {
-        currentPage: 0,
-        pageQuantity: 100
-    };
-*/
-    const sort = {
-    }
-
     const query = {
-        filter: filter,
- //       location: location,
-        sort: sort
+        username: getState().auth.currentUser.username,
+        activePage: getState().journal.activePage,
+        pageQuantity: getState().journal.pageQuantity,
+        sortfield: "timestamp",
+        sortdir: "desc"
     }
-
+    
     return getFromServer("/journal", query, authToken)
         .then(journaldata => {
             dispatch(fetchJournalSuccess(journaldata));
@@ -113,6 +103,16 @@ export const setJournalPage = data => ({
 export const CLOSE_UPDATE_JOURNAL_PAGE = 'CLOSE_UPDATE_JOURNAL_PAGE';
 export const closeUpdateJournalPage = () => ({
     type: CLOSE_UPDATE_JOURNAL_PAGE
+});
+
+export const CLOSE_NEW_JOURNAL_PAGE = 'CLOSE_NEW_JOURNAL_PAGE';
+export const closeNewJournalPage = () => ({
+    type: CLOSE_NEW_JOURNAL_PAGE
+});
+
+export const OPEN_NEW_JOURNAL_PAGE = 'OPEN_NEW_JOURNAL_PAGE';
+export const openNewJournalPage = () => ({
+    type: OPEN_NEW_JOURNAL_PAGE
 });
 
 export const updateJournal = (_id, record) => (dispatch, getState) => {

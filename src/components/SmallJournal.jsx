@@ -6,6 +6,7 @@ import {Panel,
   Button,
   ButtonGroup
   } from 'react-bootstrap';
+import {openNewJournalPage} from '../actions/journal';
 import {LinkContainer} from 'react-router-bootstrap';
 
 const titlePanel = (<h3>Journal</h3>);
@@ -22,8 +23,8 @@ export class SmallJournal extends React.Component {
           <LinkContainer to="/Journal">
             <Button>View</Button>
           </LinkContainer>
-          <LinkContainer to="/JournalNew">
-            <Button>New</Button>
+          <LinkContainer to="/Journal">
+            <Button onClick={()=>{this.props.dispatch(openNewJournalPage())}}>New</Button>
           </LinkContainer>
         </ButtonGroup >
       </Panel>

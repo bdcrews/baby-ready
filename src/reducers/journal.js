@@ -3,6 +3,8 @@ import {
     FETCH_JOURNAL_ERROR,
 //    NEW_JOURNAL_SUCCESS,
     CLOSE_UPDATE_JOURNAL_PAGE,
+    OPEN_NEW_JOURNAL_PAGE,
+    CLOSE_NEW_JOURNAL_PAGE,
     NEW_JOURNAL_ERROR,
     SET_JOURNAL_PAGE,
     FETCH_ONE_JOURNAL_SUCCESS
@@ -11,7 +13,12 @@ import {
 const initialState = {
     activePage: 1,
     updatingPage: false,
-    data: ''
+    addingPage: false,
+    pageQuantity: 2,
+    data: {
+        count: 0,
+        pages: []
+    }
 };
 
 export default function reducer(state = initialState, action) {
@@ -42,6 +49,16 @@ export default function reducer(state = initialState, action) {
     } else if (action.type === CLOSE_UPDATE_JOURNAL_PAGE) {
         return Object.assign({}, state, {
             updatingPage: false
+        });
+    } else if (action.type === CLOSE_NEW_JOURNAL_PAGE) {
+        console.log("a");
+        return Object.assign({}, state, {
+            addingPage: false
+        });
+    } else if (action.type === OPEN_NEW_JOURNAL_PAGE) {
+        console.log("b");
+        return Object.assign({}, state, {
+            addingPage: true
         });
     }else if (action.type === FETCH_ONE_JOURNAL_SUCCESS) {
         return Object.assign({}, state, {

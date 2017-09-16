@@ -181,7 +181,7 @@ export class JournalUpdate extends React.Component {
       </ButtonGroup>
     </Form>
     );
-	}
+  }
 }
 
 const mapStateToProps = state => {

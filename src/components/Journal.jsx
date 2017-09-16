@@ -3,10 +3,13 @@ import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import {Table,
   Image,
-  Pagination} from 'react-bootstrap';
+  Pagination,
+  Button} from 'react-bootstrap';
 import {fetchJournal, setJournalPage, fetchOneJournal} from '../actions/journal';
 import moment from 'moment';
 import JournalUpdate from './JournalUpdate'
+import JournalNew from './JournalNew'
+import {LinkContainer} from 'react-router-bootstrap';
 
 export class Journal extends React.Component {
   componentDidMount() {
@@ -18,6 +21,7 @@ export class Journal extends React.Component {
 
   handleSelect(eventKey) {
     this.props.dispatch(setJournalPage(eventKey));
+    this.props.dispatch(fetchJournal());
   }
 
   handleRowClick(e) {
@@ -33,6 +37,10 @@ export class Journal extends React.Component {
     if(this.props.journal.updatingPage) {
         return (<JournalUpdate/>)
     }
+
+    if(this.props.journal.addingPage) {
+        return (<JournalNew/>)
+    }
     
 
     let error;
@@ -43,31 +51,24 @@ export class Journal extends React.Component {
         </div>
       );
     }
+ 
+    const rowsOnPage = this.props.journal.pageQuantity;
+    const pageCount = Math.ceil(this.props.journal.data.count/rowsOnPage);
 
-    const table = [];  
-    const rowsOnPage = 2;
-    let pageCount = 1; 
-    if(this.props.journal.data) {
-      pageCount = Math.trunc(this.props.journal.data.length / rowsOnPage);
-      this.props.journal.data.forEach((record, index) => {
-        const startIndex = (this.props.journal.activePage - 1) * rowsOnPage;
-        if((index >= startIndex) && (index < startIndex + rowsOnPage)) {
-          table.push(
-            <tr key={record.id} id={record.id} onClick={this.handleRowClick.bind(this)}>
-              <td>{record.title}</td>
-              <td>{record.weight}</td>
-              <td>{record.systolic}/{record.diastolic}</td>
-              <td>{moment(record.timestamp).calendar()}</td>
-              <td>
-                {record.doctorCheckbox ? (<Image src="/docicon.png" rounded />) : ''}
-                {record.importantCheckbox ? (<Image src="/important.png" rounded />) : ''}
-              </td>
-            </tr>
-          );
-        }
-      });
-    };
-
+    const table = this.props.journal.data.pages.map((page) => {
+      return (
+        <tr key={page.id} id={page.id} onClick={this.handleRowClick.bind(this)}>
+          <td>{page.title}</td>
+          <td>{page.weight}</td>
+          <td>{page.systolic}/{page.diastolic}</td>
+          <td>{moment(page.timestamp).calendar()}</td>
+          <td>
+            {page.doctorCheckbox ? (<Image src="/docicon.png" rounded />) : ''}
+            {page.importantCheckbox ? (<Image src="/important.png" rounded />) : ''}
+          </td>
+        </tr>
+      )
+    });
 
     return (
       <div>
@@ -98,6 +99,9 @@ export class Journal extends React.Component {
           maxButtons={5}
           activePage={this.props.journal.activePage}
           onSelect={this.handleSelect.bind(this)} />
+
+          <br/>
+          <LinkContainer to="/Dashboard"><Button>return</Button></LinkContainer>
         </div>
 
 /*

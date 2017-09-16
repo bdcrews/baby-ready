@@ -59,7 +59,6 @@ export class App extends React.Component {
   		    <Route exact path="/" component={Landing} />
           <Route exact path="/Dashboard" component={Dashboard} />
           <Route exact path="/UserData" component={UserData} />
-          <Route exact path="/JournalNew" component={JournalNew} />
           <Route exact path="/Journal" component={Journal} />
         </div>
       </div>

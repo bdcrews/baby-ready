@@ -4,11 +4,13 @@ import {Redirect} from 'react-router-dom';
 import {Table,
   Image,
   Pagination,
-  Button} from 'react-bootstrap';
-import {fetchJournal, setJournalPage, fetchOneJournal} from '../actions/journal';
+  Button,
+  ButtonGroup} from 'react-bootstrap';
+import {fetchJournal, setJournalPage, fetchOneJournal, openNewJournalPage} from '../actions/journal';
 import moment from 'moment';
 import JournalUpdate from './JournalUpdate'
 import JournalNew from './JournalNew'
+import JournalFilter from './JournalFilter'
 import {LinkContainer} from 'react-router-bootstrap';
 
 export class Journal extends React.Component {
@@ -72,7 +74,8 @@ export class Journal extends React.Component {
 
     return (
       <div>
-      {error}
+        {error}
+        <JournalFilter />
         <Table striped bordered condensed hover responsive>
           <thead>
             <tr>
@@ -101,7 +104,10 @@ export class Journal extends React.Component {
           onSelect={this.handleSelect.bind(this)} />
 
           <br/>
-          <LinkContainer to="/Dashboard"><Button>return</Button></LinkContainer>
+          <ButtonGroup>
+            <Button onClick={()=>{this.props.dispatch(openNewJournalPage())}}>New</Button>
+            <LinkContainer to="/Dashboard"><Button>return</Button></LinkContainer>
+          </ButtonGroup>
         </div>
 
 /*

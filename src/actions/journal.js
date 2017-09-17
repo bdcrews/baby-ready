@@ -30,6 +30,12 @@ export const fetchJournal = () => (dispatch, getState) => {
         sortfield: "timestamp",
         sortdir: "desc"
     }
+    console.log(getState().journal.filter);
+    if('title' in getState().journal.filter) query['title'] = getState().journal.filter.title;
+    if('doctorCheckbox' in getState().journal.filter) query['doctorCheckbox'] = getState().journal.filter.doctorCheckbox;
+    if('importantCheckbox' in getState().journal.filter) query['importantCheckbox'] = getState().journal.filter.importantCheckbox;
+
+    console.log(query);
     
     return getFromServer("/journal", query, authToken)
         .then(journaldata => {
@@ -146,3 +152,19 @@ export const updateJournal = (_id, record) => (dispatch, getState) => {
             dispatch(newJournalError(err));
         });
 };
+
+
+export const filterJournal = (filter) => (dispatch, getState) => {
+    console.log(filter);
+        
+    dispatch(setJournalFilter(filter));
+    dispatch(setJournalPage(1));
+
+    dispatch(fetchJournal());
+}
+
+export const SET_JOURNAL_FILTER = 'SET_JOURNAL_FILTER';
+export const setJournalFilter = (filter) => ({
+    type: SET_JOURNAL_FILTER,
+    data: filter
+});

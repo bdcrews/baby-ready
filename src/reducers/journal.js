@@ -7,7 +7,8 @@ import {
     CLOSE_NEW_JOURNAL_PAGE,
     NEW_JOURNAL_ERROR,
     SET_JOURNAL_PAGE,
-    FETCH_ONE_JOURNAL_SUCCESS
+    FETCH_ONE_JOURNAL_SUCCESS,
+    SET_JOURNAL_FILTER
 } from '../actions/journal';
 
 const initialState = {
@@ -18,6 +19,11 @@ const initialState = {
     data: {
         count: 0,
         pages: []
+    },
+    filter: {
+      title: '',
+      doctorCheckbox: 'any',
+      importantCheckbox: 'any'
     }
 };
 
@@ -64,6 +70,10 @@ export default function reducer(state = initialState, action) {
         return Object.assign({}, state, {
             singleJournal: action.data,
             updatingPage: true
+        });
+    }else if (action.type === SET_JOURNAL_FILTER) {
+        return Object.assign({}, state, {
+            filter: action.data
         });
     }
     return state;

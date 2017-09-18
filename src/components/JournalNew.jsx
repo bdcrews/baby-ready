@@ -14,7 +14,6 @@ import {reduxForm, focus} from 'redux-form';
 import {openPopUp} from '../actions/pop-up';
 import {newJournal, closeNewJournalPage} from '../actions/journal';
 import {Field} from 'redux-form';
-import {LinkContainer} from 'react-router-bootstrap';
 
 export class JournalNew extends React.Component {
   onSubmit(value) {
@@ -161,20 +160,17 @@ export class JournalNew extends React.Component {
           <Button
             type="button"
             disabled={this.props.submitting}
-            bsSize="lg"
             onClick={()=>{this.props.dispatch(closeNewJournalPage())}}>
             Close
           </Button>
         <Button
           type="reset"
-          disabled={this.props.pristine || this.props.submitting}
-          bsSize="lg">
+          disabled={this.props.pristine || this.props.submitting}>
           Reset
         </Button>
         <Button
           type="submit"
           disabled={this.props.pristine || this.props.submitting}
-          bsSize="lg"
           bsStyle="primary">
           Create
         </Button>

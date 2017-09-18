@@ -15,10 +15,6 @@ export class NavBar extends React.Component {
     clearAuthToken();
   }
 
-  linkToUserData() {
-    console.log("linkToUserData() ");
-  }
-
   render() {
     let menuOptions;
     if(!this.props.loggedIn) {

@@ -4,7 +4,6 @@ import {BrowserRouter as Router, Route} from 'react-router-dom';
 import Landing from './Landing'
 import Dashboard from './Dashboard'
 import UserData from './UserData'
-import JournalNew from './JournalNew'
 import Journal from './Journal'
 import NavBar from './NavBar'
 import PopUp from './PopUp'

@@ -153,21 +153,18 @@ export class UserData extends React.Component {
         <LinkContainer to="/Dashboard">
           <Button
             type="button"
-            disabled={this.props.submitting}
-            bsSize="lg">
+            disabled={this.props.submitting}>
             Cancel
           </Button>
         </LinkContainer>
         <Button
           type="reset"
-          disabled={this.props.pristine || this.props.submitting}
-          bsSize="lg">
+          disabled={this.props.pristine || this.props.submitting}>
           Reset
         </Button>
         <Button
           type="submit"
           disabled={this.props.pristine || this.props.submitting}
-          bsSize="lg"
           bsStyle="primary">
           Update
         </Button>

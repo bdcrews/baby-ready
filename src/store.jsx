@@ -6,6 +6,7 @@ import authReducer from './reducers/auth';
 import userReducer from './reducers/user';
 import popUpReducer from './reducers/pop-up';
 import journalReducer from './reducers/journal';
+import tipReducer from './reducers/tips';
 import {setAuthToken} from './actions/auth';
 
 const store = createStore(
@@ -14,7 +15,8 @@ const store = createStore(
         auth: authReducer,
         user: userReducer,
         popup: popUpReducer,
-        journal: journalReducer
+        journal: journalReducer,
+        tips: tipReducer
     }),
     applyMiddleware(thunk)
 );

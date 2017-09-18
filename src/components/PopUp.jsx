@@ -15,7 +15,6 @@ export class PopUp extends React.Component {
 
   render() {
     if (this.props.status==='closed') {
-        console.log(this.props.returnTo);
         return <Redirect to={this.props.returnTo} />;
     }
 

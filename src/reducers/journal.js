@@ -21,9 +21,9 @@ const initialState = {
         pages: []
     },
     filter: {
-      title: '',
-      doctorCheckbox: 'any',
-      importantCheckbox: 'any'
+//      title: '',
+//      doctorCheckbox: 'any',
+//      importantCheckbox: 'any'
     }
 };
 
@@ -57,12 +57,10 @@ export default function reducer(state = initialState, action) {
             updatingPage: false
         });
     } else if (action.type === CLOSE_NEW_JOURNAL_PAGE) {
-        console.log("a");
         return Object.assign({}, state, {
             addingPage: false
         });
     } else if (action.type === OPEN_NEW_JOURNAL_PAGE) {
-        console.log("b");
         return Object.assign({}, state, {
             addingPage: true
         });

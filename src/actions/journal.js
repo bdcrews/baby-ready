@@ -30,13 +30,10 @@ export const fetchJournal = () => (dispatch, getState) => {
         sortfield: "timestamp",
         sortdir: "desc"
     }
-    console.log(getState().journal.filter);
     if('title' in getState().journal.filter) query['title'] = getState().journal.filter.title;
     if('doctorCheckbox' in getState().journal.filter) query['doctorCheckbox'] = getState().journal.filter.doctorCheckbox;
     if('importantCheckbox' in getState().journal.filter) query['importantCheckbox'] = getState().journal.filter.importantCheckbox;
 
-    console.log(query);
-    
     return getFromServer("/journal", query, authToken)
         .then(journaldata => {
             dispatch(fetchJournalSuccess(journaldata));
@@ -92,7 +89,8 @@ export const newJournal = (record) => (dispatch, getState) => {
             dispatch(openPopUp({
               status: 'Successful',
               title: 'Update Results',
-              description: 'New journal entry added.'
+              description: 'New journal entry added.',
+              returnTo: '/Journal'
             }));
         })
         .catch(err => {
@@ -142,7 +140,8 @@ export const updateJournal = (_id, record) => (dispatch, getState) => {
             dispatch(openPopUp({
               status: 'Successful',
               title: 'Update Results',
-              description: 'Journal entry updated.'
+              description: 'Journal page updated.',
+              returnTo: '/Journal'
             }));
         })
         .then(() => {
@@ -153,10 +152,39 @@ export const updateJournal = (_id, record) => (dispatch, getState) => {
         });
 };
 
+export const deleteJournalPage = (_id) => (dispatch, getState) => {
+    const authToken = getState().auth.authToken;
+    return fetch(`/journal/` + _id, {
+        method: 'DELETE',
+        headers: {
+            // Provide our auth token as credentials
+            Authorization: `Bearer ${authToken}`,
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        }
+    })
+        .then(res => normalizeResponseErrors(res))
+        .then(res => res.json())
+        .then(journal => {
+            dispatch(fetchJournal());
+        })
+        .then(() => {
+            dispatch(openPopUp({
+              status: 'Successful',
+              title: 'Detele Page',
+              description: 'Journal page deleted.',
+              returnTo: '/Journal'
+            }));
+        })
+        .then(() => {
+            dispatch(closeUpdateJournalPage());
+        })
+        .catch(err => {
+            dispatch(newJournalError(err));
+        });
+}
 
 export const filterJournal = (filter) => (dispatch, getState) => {
-    console.log(filter);
-        
     dispatch(setJournalFilter(filter));
     dispatch(setJournalPage(1));
 

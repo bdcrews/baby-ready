@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Redirect} from 'react-router-dom';
 import {Button, 
   Form, 
   FormGroup, 
@@ -9,18 +8,13 @@ import {Button,
   Panel,
   ButtonGroup,
   Col,
-  Accordion,
-  Radio} from 'react-bootstrap';
-import {reduxForm, focus} from 'redux-form';
-import {openPopUp} from '../actions/pop-up';
-import {newJournal, closeNewJournalPage, filterJournal} from '../actions/journal';
+  Accordion} from 'react-bootstrap';
+import {reduxForm} from 'redux-form';
+import {filterJournal} from '../actions/journal';
 import {Field} from 'redux-form';
-import {LinkContainer} from 'react-router-bootstrap';
 
 export class JournalFilter extends React.Component {
   onSubmit(value) {
-    console.log("Submitted");
-
     // dispatch to update the api
     const filter = {};
     if(value.titleFilter!=='') filter['title'] = value.titleFilter;
@@ -39,7 +33,7 @@ export class JournalFilter extends React.Component {
         </div>
       );
     }
-console.log(this.props);
+
     return (
     <Form 
       className='JournalFilterForm' 
@@ -60,7 +54,6 @@ console.log(this.props);
                     name="titleFilter"
                     placeholder="filter by page title"
                     label="Title"
-                    placeholder="Type here"
               />
             </Col> 
           </FormGroup>
@@ -110,14 +103,12 @@ console.log(this.props);
           <ButtonGroup >
             <Button
               type="reset"
-              disabled={this.props.pristine || this.props.submitting}
-              bsSize="lg">
+              disabled={this.props.pristine || this.props.submitting}>
               Reset
             </Button>
             <Button
               type="submit"
               disabled={this.props.pristine || this.props.submitting}
-              bsSize="lg"
               bsStyle="primary">
               Filter
             </Button>
@@ -136,8 +127,8 @@ const mapStateToProps = state => {
         user: state.user.data,
         initialValues: {
           titleFilter: state.journal.filter.title,
-          docVisitFilter: state.journal.filter.doctorCheckbox,
-          importantFilter: state.journal.filter.importantCheckbox
+          docVisitFilter: state.journal.filter.doctorCheckbox || 'any',
+          importantFilter: state.journal.filter.importantCheckbox || 'any'
         },
         username: state.user.data.username
     };
@@ -146,7 +137,6 @@ const mapStateToProps = state => {
 const reduxJournalFilter = reduxForm({
     form: 'JournalFilter',
     onSubmitFail: (errors, dispatch) => {
-      console.log(errors);
       //dispatch(focus('JournalFilter', Object.keys(errors)[0]));
     }
   })(JournalFilter)

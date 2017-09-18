@@ -12,7 +12,7 @@ import {Button,
   Accordion} from 'react-bootstrap';
 import {reduxForm, focus} from 'redux-form';
 import {openPopUp} from '../actions/pop-up';
-import {closeUpdateJournalPage, updateJournal} from '../actions/journal';
+import {closeUpdateJournalPage, updateJournal, deleteJournalPage} from '../actions/journal';
 import {Field} from 'redux-form';
 
 export class JournalUpdate extends React.Component {
@@ -37,7 +37,7 @@ export class JournalUpdate extends React.Component {
       systolic: value.systolic,
       diastolic: value.diastolic
     }
-    console.log(this.props.journal);
+
     return this.props.dispatch(updateJournal( this.props.journal.singleJournal.id,record));
   }
 
@@ -161,20 +161,24 @@ export class JournalUpdate extends React.Component {
           <Button
             type="button"
             disabled={this.props.submitting}
-            bsSize="lg"
             onClick={() => this.props.dispatch(closeUpdateJournalPage())}>
             Cancel
           </Button>
         <Button
           type="reset"
-          disabled={this.props.pristine || this.props.submitting}
-          bsSize="lg">
+          disabled={this.props.pristine || this.props.submitting}>
           Reset
+        </Button>
+        <Button
+          type="button"
+          disabled={this.props.submitting}
+          onClick={() => this.props.dispatch(deleteJournalPage(this.props.journal.singleJournal.id))}
+          bsStyle="danger">
+          Delete
         </Button>
         <Button
           type="submit"
           disabled={this.props.pristine || this.props.submitting}
-          bsSize="lg"
           bsStyle="primary">
           Update
         </Button>

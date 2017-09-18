@@ -6,6 +6,7 @@ import './Dashboard.css';
 import {fetchUserData} from '../actions/users';
 import SmallUserData from './SmallUserData';
 import SmallJournal from './SmallJournal';
+import SmallTips from './SmallTips';
 
 export class Dashboard extends React.Component {
   componentDidMount() {
@@ -20,11 +21,14 @@ export class Dashboard extends React.Component {
     if (!this.props.loggedIn) {
         return <Redirect to="/" />;
     }
-
+    
     return (
       <section>
         <Grid fluid>
           <Row className="show-grid">
+            <Col xs={12} sm={6} md={6}>
+              <SmallTips />
+            </Col>
             <Col xs={12} sm={6} md={6}>
               <SmallJournal />
             </Col>

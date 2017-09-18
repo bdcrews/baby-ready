@@ -39,8 +39,8 @@ export class SmallUserData extends React.Component {
             {this.createDayCounter()}
           </ListGroupItem>
         </ListGroup>
-        <LinkContainer to="/UserData">
-          <Button>Update</Button>
+        <LinkContainer to="/UserData" className="pull-right">
+          <Button >Update</Button>
         </LinkContainer>
       </Panel>
       );

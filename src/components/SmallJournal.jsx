@@ -19,7 +19,7 @@ export class SmallJournal extends React.Component {
         <ListGroup>
           <ListGroupItem header={this.props.name}>{this.props.user.username}</ListGroupItem>
         </ListGroup>
-        <ButtonGroup >
+        <ButtonGroup className="pull-right">
           <LinkContainer to="/Journal">
             <Button>View</Button>
           </LinkContainer>

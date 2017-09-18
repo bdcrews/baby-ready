@@ -104,7 +104,7 @@ export class Journal extends React.Component {
           onSelect={this.handleSelect.bind(this)} />
 
           <br/>
-          <ButtonGroup>
+          <ButtonGroup className="pull-right">
             <Button onClick={()=>{this.props.dispatch(openNewJournalPage())}}>New</Button>
             <LinkContainer to="/Dashboard"><Button>return</Button></LinkContainer>
           </ButtonGroup>

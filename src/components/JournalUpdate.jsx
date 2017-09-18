@@ -157,7 +157,7 @@ export class JournalUpdate extends React.Component {
         </Panel>
       </Accordion>
 
-      <ButtonGroup >
+      <ButtonGroup className="pull-right">
           <Button
             type="button"
             disabled={this.props.submitting}

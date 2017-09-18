@@ -19,7 +19,7 @@ export class SmallTips extends React.Component {
         <ListGroup>
           <ListGroupItem header={tips[tipIndex].title}>{tips[tipIndex].text}</ListGroupItem>
         </ListGroup>
-        <ButtonGroup >
+        <ButtonGroup className="pull-right">
           <Button onClick={()=>{this.props.dispatch(setTipsIndex(tipIndex - 1))}}>Prev</Button>
           <Button onClick={()=>{this.props.dispatch(setTipsIndex(tipIndex + 1))}}>Next</Button>
         </ButtonGroup >

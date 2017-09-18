@@ -100,7 +100,7 @@ export class JournalFilter extends React.Component {
             </Col> 
           </FormGroup>
 
-          <ButtonGroup >
+          <ButtonGroup className="pull-right">
             <Button
               type="reset"
               disabled={this.props.pristine || this.props.submitting}>

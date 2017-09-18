@@ -149,7 +149,7 @@ export class UserData extends React.Component {
           </ListGroupItem>
         </ListGroup>
       </Panel>
-      <ButtonGroup >
+      <ButtonGroup className="pull-right">
         <LinkContainer to="/Dashboard">
           <Button
             type="button"

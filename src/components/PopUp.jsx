@@ -31,6 +31,7 @@ export class PopUp extends React.Component {
 
           <Modal.Footer>
             <Button 
+              className="pull-right" 
               onClick={this.close.bind(this)}
               disabled={this.props.status==='updating'}>
               {(this.props.status==='updating') ? 'updating...':  'Close'}

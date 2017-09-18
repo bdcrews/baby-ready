@@ -32,7 +32,7 @@ export class NavBar extends React.Component {
           <MenuItem divider />
           <LinkContainer to="/Dashboard"><MenuItem eventKey={2.1} >Dashboard</MenuItem></LinkContainer>
           <LinkContainer to="/UserData"><MenuItem eventKey={2.2} >User data</MenuItem></LinkContainer>
-          <LinkContainer to="/JournalNew"><MenuItem eventKey={2.3} >New journal page</MenuItem></LinkContainer>
+          <LinkContainer to="/Journal"><MenuItem eventKey={2.3} >Open journal</MenuItem></LinkContainer>
           <MenuItem divider />
           <MenuItem eventKey={2.2} onClick={() => this.logOut()}>Logout</MenuItem>
         </NavDropdown>

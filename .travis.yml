@@ -1,4 +1,4 @@
-language: node_js
+ language: node_js
  node_js: node
  cache:
    directories:
@@ -16,5 +16,5 @@ language: node_js
    provider: script
    script: netlify deploy -s $NETLIFY_SITE_ID -t $NETLIFY_ACCESS_TOKEN -p ./build
    skip_cleanup: true
-   on: 
-    repo: master
+   on:
+     branch: master

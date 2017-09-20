@@ -1,3 +1,5 @@
+const {API_BASE_URL} = require('../config');
+
 // Boilerplate code for handling errors from the API.  If the error response
 // contains JSON then we return a rejected promise containing the decoded
 // JSON.  If the error doesn't contain JSON then we return a rejected promise
@@ -30,7 +32,7 @@ const queryString = (query) => {
 
 export const getFromServer = (url, query, authToken) => {
     const finalUrl = query ? url + '?' + queryString(query) : url;
-    return fetch(finalUrl, {
+    return fetch(API_BASE_URL + finalUrl, {
         method: 'GET',
         headers: {
             // Provide our auth token as credentials

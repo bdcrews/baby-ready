@@ -1,11 +1,12 @@
 import {SubmissionError} from 'redux-form';
-
 import {normalizeResponseErrors} from './utils';
 import {openPopUp} from '../actions/pop-up';
 
+const {API_BASE_URL} = require('../config');
+
 
 export const registerUser = user => dispatch => {
-    return fetch(`/users`, {
+    return fetch(API_BASE_URL + `/users`, {
         method: 'POST',
         headers: {
             'content-type': 'application/json'
@@ -52,7 +53,7 @@ export const fetchUserData = () => (dispatch, getState) => {
         .join('&');
 
      //   dispatch(fetchUserDataAttempt({title, discription,}));
-    return fetch(`/users?` + query, {
+    return fetch(API_BASE_URL + `/users?` + query, {
         method: 'GET',
         headers: {
             // Provide our auth token as credentials
@@ -83,7 +84,7 @@ export const updateUserDataError = error => ({
 
 export const updateUserData = (record) => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
-    return fetch(`/users/` + getState().user.data.id, {
+    return fetch(API_BASE_URL + `/users/` + getState().user.data.id, {
         method: 'PUT',
         headers: {
             // Provide our auth token as credentials

@@ -1,6 +1,6 @@
 import {openPopUp} from '../actions/pop-up';
-
 import {normalizeResponseErrors, getFromServer} from './utils';
+const {API_BASE_URL} = require('../config');
 
 export const FETCH_JOURNAL_SUCCESS = 'FETCH_JOURNAL_SUCCESS';
 export const fetchJournalSuccess = data => ({
@@ -70,7 +70,7 @@ export const newJournalError = error => ({
 
 export const newJournal = (record) => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
-    return fetch(`/journal/` + getState().user.data.userid, {
+    return fetch(API_BASE_URL + `/journal/` + getState().user.data.userid, {
         method: 'POST',
         headers: {
             // Provide our auth token as credentials
@@ -121,7 +121,7 @@ export const openNewJournalPage = () => ({
 
 export const updateJournal = (_id, record) => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
-    return fetch(`/journal/` + _id, {
+    return fetch(API_BASE_URL + `/journal/` + _id, {
         method: 'PUT',
         headers: {
             // Provide our auth token as credentials
@@ -154,7 +154,7 @@ export const updateJournal = (_id, record) => (dispatch, getState) => {
 
 export const deleteJournalPage = (_id) => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
-    return fetch(`/journal/` + _id, {
+    return fetch(API_BASE_URL + `/journal/` + _id, {
         method: 'DELETE',
         headers: {
             // Provide our auth token as credentials

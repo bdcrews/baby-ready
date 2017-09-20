@@ -4,6 +4,8 @@ import {SubmissionError} from 'redux-form';
 import {normalizeResponseErrors} from './utils';
 import {saveAuthToken, clearAuthToken} from '../local-storage';
 
+const {API_BASE_URL} = require('../config');
+
 export const SET_AUTH_TOKEN = 'SET_AUTH_TOKEN';
 export const setAuthToken = authToken => ({
     type: SET_AUTH_TOKEN,
@@ -30,7 +32,7 @@ export const login = (username, password) => dispatch => {
     // auth field
     const token = btoa(`${username}:${password}`);
     return (
-        fetch(`/auth/login`, {
+        fetch(API_BASE_URL + `/auth/login`, {
             method: 'POST',
             headers: {
                 // Provide our username and password as login credentials
@@ -59,7 +61,7 @@ export const login = (username, password) => dispatch => {
 
 export const refreshAuthToken = () => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
-    return fetch(`/auth/refresh`, {
+    return fetch(API_BASE_URL + `/auth/refresh`, {
         method: 'POST',
         headers: {
             // Provide our existing token as credentials to get a new one

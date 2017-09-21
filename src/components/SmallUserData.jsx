@@ -7,37 +7,73 @@ import {Panel,
   } from 'react-bootstrap';
 import moment from 'moment';
 import {LinkContainer} from 'react-router-bootstrap';
+import './SmallUserData.css';
 
 const titlePanel = (<h3>User data</h3>);
 
 export class SmallUserData extends React.Component {
   createDayCounter() {
-    let lmd = this.props.lmd;
-    let dd = this.props.dueDate;
+    const lmd = this.props.lmd;
+    const dd = this.props.dueDate;
 
-    if((dd === '') && (lmd === '')) { 
-      return('Please update user data.');
+    if((dd !== '') || (lmd !== '')) { 
+      const dueDate = dd ? moment(dd) : moment(lmd).add(240,'days');
+
+      return(
+        <ListGroupItem className="centerText">
+          <strong className="dueDateBanner">{dueDate.fromNow(true)}</strong><br/>
+          <small> Due: {dueDate.format('MMMM Do YYYY')}</small>
+        </ListGroupItem>
+      );
     }
 
-    let days = dd 
-      ? moment(dd).fromNow()
-      : moment(lmd).add(240,'days').fromNow();
+    return ('');
+  }
 
-    return(
-      <div>
-        Baby {days} 
-      </div>
-      )
+  createDoctor() {
+    if (this.props.docName) {
+      return(
+        <ListGroupItem header={"Dr. " + this.props.docName}>
+          {this.props.docPhone}
+        </ListGroupItem>
+      );
+    }
+
+    return ('');
+  }
+
+  createBloodtype() {
+    if (this.props.bloodType) {
+      return(
+        <ListGroupItem header="Bloodtype">
+          {this.props.bloodType} {this.props.rhFactor}
+        </ListGroupItem>
+      );
+    }
+
+    return ('');
+  }
+
+  createNotes() {
+    if (this.props.userNotes) {
+      return(
+        <ListGroupItem header="Notes">
+          {this.props.userNotes}
+        </ListGroupItem>
+      );
+    }
+
+    return ('');
   }
 
   render() {
     return(
       <Panel header={titlePanel}>
         <ListGroup>
-          <ListGroupItem header={this.props.name}>{this.props.user.username}</ListGroupItem>
-          <ListGroupItem>
-            {this.createDayCounter()}
-          </ListGroupItem>
+          {this.createDayCounter()}
+          {this.createDoctor()}
+          {this.createBloodtype()}
+          {this.createNotes()}
         </ListGroup>
         <LinkContainer to="/UserData" className="pull-right">
           <Button >Update</Button>
@@ -59,6 +95,21 @@ const mapStateToProps = state => {
             : '',
         lmd: userData 
             ? userData.lmd 
+            : '',
+        bloodType: userData
+            ? userData.bloodType
+            : '',
+        rhFactor: userData
+            ? userData.rhFactor
+            : '',
+        docName: userData
+            ? userData.docName
+            : '',
+        docPhone: userData
+            ? userData.docPhone
+            : '',
+        userNotes: userData
+            ? userData.userNotes
             : ''
     };
 };

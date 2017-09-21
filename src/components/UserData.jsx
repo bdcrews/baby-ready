@@ -37,7 +37,12 @@ export class UserData extends React.Component {
       firstName: value.firstName,
       lastName: value.lastName,
       lmd: value.lastMenstration,
-      dueDate: value.dueDate
+      dueDate: value.dueDate,
+      bloodType: value.bloodType,
+      rhFactor: value.rhFactor,
+      docName: value.docName,
+      docPhone: value.docPhone,
+      userNotes: value.userNotes
     }
     return this.props.dispatch(updateUserData(record));
   }
@@ -109,6 +114,59 @@ export class UserData extends React.Component {
           />
         </Col> 
       </FormGroup>
+      <br />
+      <FormGroup controlId="formControlsBloodtype">
+        <Col componentClass={ControlLabel} sm={2}>
+          Bloodtype
+        </Col>  
+        <Col sm={4}>   
+          <FormControl componentClass={Field} component="select" name="bloodType">
+            <option></option>
+            <option value="O">O</option>
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="AB">AB</option>
+          </FormControl>
+        </Col> 
+
+        <Col componentClass={ControlLabel} sm={2}>
+          Rh factor
+        </Col>  
+        <Col sm={4}>   
+          <FormControl componentClass={Field} component="select" name="rhFactor">
+            <option></option>
+            <option value="pos">positive</option>
+            <option value="neg">negative</option>
+          </FormControl>
+        </Col> 
+      </FormGroup>
+
+      <FormGroup controlId="formControlsDoctor">
+        <Col componentClass={ControlLabel} sm={2}>
+          Doctor Name
+        </Col>  
+        <Col sm={4}>   
+          <FormControl componentClass={Field} component="input" name="docName"/>
+        </Col> 
+
+        <Col componentClass={ControlLabel} sm={2}>
+          Doctor Phone Number
+        </Col>  
+        <Col sm={4}>   
+          <FormControl componentClass={Field} component="input" name="docPhone" type="tel" />
+        </Col> 
+      </FormGroup> 
+
+      <FormGroup controlId="formControlsNotes" className="container">
+        <ControlLabel>Notes:</ControlLabel>
+        <FormControl componentClass={Field} component="textarea" 
+              name="userNotes"
+              type="textarea"
+              label="User Notes"
+              placeholder="Type here any other information you want to keep handy."
+        />
+      </FormGroup> 
+
       <Panel header="Due date calculator" footer={this.createFooter()}>
         <ListGroup fill>
           <ListGroupItem>
@@ -149,6 +207,7 @@ export class UserData extends React.Component {
           </ListGroupItem>
         </ListGroup>
       </Panel>
+
       <ButtonGroup className="pull-right">
         <LinkContainer to="/Dashboard">
           <Button
@@ -184,6 +243,11 @@ const mapStateToProps = state => {
           userName: state.user.data.username,
           firstName: state.user.data.firstName,
           lastName: state.user.data.lastName,
+          bloodType: state.user.data.bloodType,
+          rhFactor: state.user.data.rhFactor,
+          docName: state.user.data.docName,
+          docPhone: state.user.data.docPhone,
+          userNotes: state.user.data.userNotes,
           lastMenstration: String(state.user.data.lmd).split('T')[0],
           dueDate: String(state.user.data.dueDate).split('T')[0]
         },

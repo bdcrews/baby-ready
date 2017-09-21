@@ -84,6 +84,7 @@ export const updateUserDataError = error => ({
 
 export const updateUserData = (record) => (dispatch, getState) => {
     const authToken = getState().auth.authToken;
+        console.log(record);
     return fetch(API_BASE_URL + `/users/` + getState().user.data.id, {
         method: 'PUT',
         headers: {

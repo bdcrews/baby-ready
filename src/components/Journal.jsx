@@ -14,13 +14,6 @@ import JournalFilter from './JournalFilter'
 import {LinkContainer} from 'react-router-bootstrap';
 
 export class Journal extends React.Component {
-  componentDidMount() {
-    if (!this.props.loggedIn) {
-      return;
-    }
-    this.props.dispatch(fetchJournal());
-  }
-
   handleSelect(eventKey) {
     this.props.dispatch(setJournalPage(eventKey));
     this.props.dispatch(fetchJournal());

@@ -15,7 +15,7 @@ const initialState = {
     activePage: 1,
     updatingPage: false,
     addingPage: false,
-    pageQuantity: 2,
+    pageQuantity: 10,
     data: {
         count: 0,
         pages: []

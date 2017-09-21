@@ -4,6 +4,7 @@ import {Redirect} from 'react-router-dom';
 import {Grid, Row, Col} from 'react-bootstrap';
 import './Dashboard.css';
 import {fetchUserData} from '../actions/users';
+import {fetchJournal} from '../actions/journal';
 import SmallUserData from './SmallUserData';
 import SmallJournal from './SmallJournal';
 import SmallTips from './SmallTips';
@@ -14,6 +15,7 @@ export class Dashboard extends React.Component {
       return;
     }
     this.props.dispatch(fetchUserData());
+    this.props.dispatch(fetchJournal());
   }
 
   render() {
@@ -27,13 +29,13 @@ export class Dashboard extends React.Component {
         <Grid fluid>
           <Row className="show-grid">
             <Col xs={12} sm={6} md={6}>
-              <SmallTips />
+              <SmallUserData />
             </Col>
             <Col xs={12} sm={6} md={6}>
               <SmallJournal />
             </Col>
             <Col xs={12} sm={6} md={6}>
-              <SmallUserData />
+              <SmallTips />
             </Col>
           </Row>
         </Grid>
@@ -54,6 +56,4 @@ const mapStateToProps = state => {
     };
 };
 
-
 export default connect(mapStateToProps)(Dashboard);
-

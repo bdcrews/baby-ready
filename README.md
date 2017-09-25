@@ -1,6 +1,6 @@
 <h1>Baby Ready</h1>
 <p><a href="https://bookkeeper-ape-63565.netlify.com/">Baby Ready</a> is a responsive full-stack app that allows users to record and track important information related to their pregnancy.</p>
-<img src="public/help0001.png">
+<img src="public/help0101.png">
 
 ## Getting started
 ### Installing

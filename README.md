@@ -5,13 +5,12 @@
 ## Getting started
 ### Installing
 ```
->   `git clone https://github.com/bdcrews/baby-ready`
->   `cd baby-ready`
->   `npm install`
-```
->   `git clone https://github.com/bdcrews/baby-ready-server`
->   `cd baby-ready`
->   `npm install`
+`git clone https://github.com/bdcrews/baby-ready`
+`cd baby-ready`
+`npm install`
+`git clone https://github.com/bdcrews/baby-ready-server`
+`cd baby-ready`
+`npm install`
 ```
 ### Launching
 ```

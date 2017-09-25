@@ -93,6 +93,9 @@ export const newJournal = (record) => (dispatch, getState) => {
               returnTo: '/Journal'
             }));
         })
+        .then(() => {
+            dispatch(closeNewJournalPage());
+        })
         .catch(err => {
             dispatch(newJournalError(err));
         });

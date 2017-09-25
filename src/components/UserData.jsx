@@ -14,7 +14,6 @@ import {Button,
   ButtonGroup,
   Col} from 'react-bootstrap';
 import {reduxForm, focus} from 'redux-form';
-import './UserData.css';
 import {openPopUp} from '../actions/pop-up';
 import {updateUserData} from '../actions/users';
 import {Field} from 'redux-form';
@@ -50,21 +49,21 @@ export class UserData extends React.Component {
   createFooter() {
     let lmd = this.props.lastMenstration;
     let dd = this.props.dueDate;
-    if(dd !== '' ) { return('Due date: ' + moment(dd).format("dddd, MMMM Do, YYYY"));}
-    if(lmd !== '') { return('Estimated due date: ' + moment(lmd).add(240,'days').format("dddd, MMMM Do, YYYY"));}
+    if(dd !== '' ) { return('Due date: ' + moment(dd).format('dddd, MMMM Do, YYYY'));}
+    if(lmd !== '') { return('Estimated due date: ' + moment(lmd).add(240,'days').format('dddd, MMMM Do, YYYY'));}
     return('Enter a valid last menstration date or due date.');
   }
 
   render() {
     //Only visible to logged in users
     if (!this.props.loggedIn) {
-        return <Redirect to="/" />;
+        return <Redirect to='/' />;
     }
 
     let error;
     if (this.props.error) {
       error = (
-        <div className="form-error" aria-live="polite">
+        <div className='form-error' aria-live='polite'>
           {this.props.error}
         </div>
       );
@@ -77,55 +76,55 @@ export class UserData extends React.Component {
       onReset={this.props.reset}
       horizontal>
       {error}
-      <FormGroup controlId="formControlsUserName">
+      <FormGroup controlId='formControlsUserName'>
         <Col componentClass={ControlLabel} sm={2}>
           User Name
         </Col>
         <Col sm={10}> 
-          <FormControl componentClass={Field} component="input" 
-              name="userName"
-              type="email"
-              label="User Name"
+          <FormControl componentClass={Field} component='input' 
+              name='userName'
+              type='email'
+              label='User Name'
               readOnly
           />
         </Col> 
       </FormGroup>
-      <FormGroup controlId="formControlsFirstName">
+      <FormGroup controlId='formControlsFirstName'>
         <Col componentClass={ControlLabel} sm={2}>
           First name
         </Col> 
         <Col sm={10}>      
-          <FormControl componentClass={Field} component="input"  
-              name="firstName"
-              type="text"
-              placeholder="first name"
+          <FormControl componentClass={Field} component='input'  
+              name='firstName'
+              type='text'
+              placeholder='first name'
           />
         </Col> 
       </FormGroup>
-      <FormGroup controlId="formControlsLastName">
+      <FormGroup controlId='formControlsLastName'>
         <Col componentClass={ControlLabel} sm={2}>
           Last name
         </Col>    
         <Col sm={10}>  
-          <FormControl componentClass={Field} component="input"  
-              name="lastName"
-              type="text"
-              placeholder="last name"
+          <FormControl componentClass={Field} component='input'  
+              name='lastName'
+              type='text'
+              placeholder='last name'
           />
         </Col> 
       </FormGroup>
       <br />
-      <FormGroup controlId="formControlsBloodtype">
+      <FormGroup controlId='formControlsBloodtype'>
         <Col componentClass={ControlLabel} sm={2}>
           Bloodtype
         </Col>  
         <Col sm={4}>   
-          <FormControl componentClass={Field} component="select" name="bloodType">
+          <FormControl componentClass={Field} component='select' name='bloodType'>
             <option></option>
-            <option value="O">O</option>
-            <option value="A">A</option>
-            <option value="B">B</option>
-            <option value="AB">AB</option>
+            <option value='O'>O</option>
+            <option value='A'>A</option>
+            <option value='B'>B</option>
+            <option value='AB'>AB</option>
           </FormControl>
         </Col> 
 
@@ -133,52 +132,52 @@ export class UserData extends React.Component {
           Rh factor
         </Col>  
         <Col sm={4}>   
-          <FormControl componentClass={Field} component="select" name="rhFactor">
+          <FormControl componentClass={Field} component='select' name='rhFactor'>
             <option></option>
-            <option value="pos">positive</option>
-            <option value="neg">negative</option>
+            <option value='pos'>positive</option>
+            <option value='neg'>negative</option>
           </FormControl>
         </Col> 
       </FormGroup>
 
-      <FormGroup controlId="formControlsDoctor">
+      <FormGroup controlId='formControlsDoctor'>
         <Col componentClass={ControlLabel} sm={2}>
           Doctor Name
         </Col>  
         <Col sm={4}>   
-          <FormControl componentClass={Field} component="input" name="docName"/>
+          <FormControl componentClass={Field} component='input' name='docName'/>
         </Col> 
 
         <Col componentClass={ControlLabel} sm={2}>
           Doctor Phone Number
         </Col>  
         <Col sm={4}>   
-          <FormControl componentClass={Field} component="input" name="docPhone" type="tel" />
+          <FormControl componentClass={Field} component='input' name='docPhone' type='tel' />
         </Col> 
       </FormGroup> 
 
-      <FormGroup controlId="formControlsNotes" className="container">
+      <FormGroup controlId='formControlsNotes' className='container'>
         <ControlLabel>Notes:</ControlLabel>
-        <FormControl componentClass={Field} component="textarea" 
-              name="userNotes"
-              type="textarea"
-              label="User Notes"
-              placeholder="Type here any other information you want to keep handy."
+        <FormControl componentClass={Field} component='textarea' 
+              name='userNotes'
+              type='textarea'
+              label='User Notes'
+              placeholder='Type here any other information you want to keep handy.'
         />
       </FormGroup> 
 
-      <Panel header="Due date calculator" footer={this.createFooter()}>
+      <Panel header='Due date calculator' footer={this.createFooter()}>
         <ListGroup fill>
           <ListGroupItem>
-            <FormGroup controlId="formControlsLastMenstration">
+            <FormGroup controlId='formControlsLastMenstration'>
               <Col componentClass={ControlLabel} sm={3}>
                 Last menstration date
               </Col>
               <Col sm={9}> 
                 <InputGroup>         
-                  <FormControl componentClass={Field} component="input" 
-                      name="lastMenstration"
-                      type="date"
+                  <FormControl componentClass={Field} component='input' 
+                      name='lastMenstration'
+                      type='date'
                   />
                 </InputGroup>
               </Col>
@@ -188,15 +187,15 @@ export class UserData extends React.Component {
             </FormGroup>
           </ListGroupItem>
           <ListGroupItem>
-            <FormGroup controlId="formControlsDueDate">
+            <FormGroup controlId='formControlsDueDate'>
               <Col componentClass={ControlLabel} sm={3}>
                 Due date from doctor
               </Col>   
               <Col sm={9}> 
                 <InputGroup> 
-                  <FormControl componentClass={Field} component="input" 
-                      name="dueDate"
-                      type="date"
+                  <FormControl componentClass={Field} component='input' 
+                      name='dueDate'
+                      type='date'
                   />
                 </InputGroup>
               </Col> 
@@ -208,23 +207,23 @@ export class UserData extends React.Component {
         </ListGroup>
       </Panel>
 
-      <ButtonGroup className="pull-right">
-        <LinkContainer to="/Dashboard">
+      <ButtonGroup className='pull-right'>
+        <LinkContainer to='/Dashboard'>
           <Button
-            type="button"
+            type='button'
             disabled={this.props.submitting}>
             Cancel
           </Button>
         </LinkContainer>
         <Button
-          type="reset"
+          type='reset'
           disabled={this.props.pristine || this.props.submitting}>
           Reset
         </Button>
         <Button
-          type="submit"
+          type='submit'
           disabled={this.props.pristine || this.props.submitting}
-          bsStyle="primary">
+          bsStyle='primary'>
           Update
         </Button>
       </ButtonGroup>

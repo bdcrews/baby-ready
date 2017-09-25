@@ -14,13 +14,13 @@ export default class Input extends React.Component {
 
         let warning;
         if (this.props.meta.touched && this.props.meta.warning) {
-            warning = <HelpBlock className="input-warning">{this.props.meta.warning}</HelpBlock>;
+            warning = <HelpBlock className='input-warning'>{this.props.meta.warning}</HelpBlock>;
             validationState = 'warning';
         }
 
         let error;
         if (this.props.meta.touched && this.props.meta.error) {
-            error = <HelpBlock className="input-error">{this.props.meta.error}</HelpBlock>;
+            error = <HelpBlock className='input-error'>{this.props.meta.error}</HelpBlock>;
             validationState = 'error';
         }
         return (

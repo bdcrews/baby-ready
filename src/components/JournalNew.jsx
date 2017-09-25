@@ -43,13 +43,13 @@ export class JournalNew extends React.Component {
   render() {
     //Only visible to logged in users
     if (!this.props.loggedIn) {
-        return <Redirect to="/" />;
+        return <Redirect to='/' />;
     }
 
     let error;
     if (this.props.error) {
       error = (
-        <div className="form-error" aria-live="polite">
+        <div className='form-error' aria-live='polite'>
           {this.props.error}
         </div>
       );
@@ -62,33 +62,33 @@ export class JournalNew extends React.Component {
       onReset={this.props.reset}
       horizontal>
       {error}
-      <FormGroup controlId="formControlsUserName">
-        <FormControl componentClass={Field} component="input" 
-              name="title"
-              type="text"
-              label="Title"
-              placeholder="Title"
+      <FormGroup controlId='formControlsUserName'>
+        <FormControl componentClass={Field} component='input' 
+              name='title'
+              type='text'
+              label='Title'
+              placeholder='Title'
         />
       </FormGroup>
-      <FormGroup controlId="formControlsUserName">
-        <FormControl componentClass={Field} component="textarea" 
-              name="journalText"
-              type="textarea"
-              label="JournalText"
-              placeholder="Type here"
+      <FormGroup controlId='formControlsUserName'>
+        <FormControl componentClass={Field} component='textarea' 
+              name='journalText'
+              type='textarea'
+              label='JournalText'
+              placeholder='Type here'
         />
       </FormGroup> 
 
       <Accordion>
-        <Panel header="details" eventKey="1" bsStyle="primary">
+        <Panel header='details' eventKey='1' bsStyle='primary'>
           <FormGroup>  
             <Col componentClass={ControlLabel} sm={2}>
               Date: 
             </Col>    
             <Col sm={10}> 
-              <FormControl componentClass={Field} component="input" 
-                name="timestamp"
-                type="datetime-local"
+              <FormControl componentClass={Field} component='input' 
+                name='timestamp'
+                type='datetime-local'
               />
             </Col> 
           </FormGroup> 
@@ -96,7 +96,7 @@ export class JournalNew extends React.Component {
             <Col sm={2}>
             </Col>    
             <Col sm={10}> 
-              <Field name="doctorCheckbox" component="input" type="checkbox"/>
+              <Field name='doctorCheckbox' component='input' type='checkbox'/>
               {'  '}
               <ControlLabel>Doctor visit</ControlLabel>
             </Col>
@@ -105,7 +105,7 @@ export class JournalNew extends React.Component {
             <Col sm={2}>
             </Col>    
             <Col sm={10}> 
-              <Field name="importantCheckbox" component="input" type="checkbox"/>
+              <Field name='importantCheckbox' component='input' type='checkbox'/>
               {'  '}
               <ControlLabel>Important</ControlLabel>
             </Col>
@@ -116,26 +116,26 @@ export class JournalNew extends React.Component {
               Weight: 
             </Col> 
             <Col sm={10}>      
-              <FormControl componentClass={Field} component="input"  
-                  name="weight"
-                  type="number"
-                  min="0"
-                  max="1000"
+              <FormControl componentClass={Field} component='input'  
+                  name='weight'
+                  type='number'
+                  min='0'
+                  max='1000'
               />
             </Col> 
           </FormGroup>
 
-          <Panel header="Blood Pressure" >
+          <Panel header='Blood Pressure' >
             <FormGroup>
               <Col componentClass={ControlLabel} sm={2}>
                 Top Number (Systolic): 
               </Col> 
               <Col sm={10}>      
-                <FormControl componentClass={Field} component="input"  
-                    name="systolic"
-                    type="number"
-                    min="0"
-                    max="1000"
+                <FormControl componentClass={Field} component='input'  
+                    name='systolic'
+                    type='number'
+                    min='0'
+                    max='1000'
                 />
               </Col> 
             </FormGroup>
@@ -144,11 +144,11 @@ export class JournalNew extends React.Component {
                 Bottom Number (Diastolic): 
               </Col> 
               <Col sm={10}>      
-                <FormControl componentClass={Field} component="input"  
-                    name="diastolic"
-                    type="number"
-                    min="0"
-                    max="1000"
+                <FormControl componentClass={Field} component='input'  
+                    name='diastolic'
+                    type='number'
+                    min='0'
+                    max='1000'
                 />
               </Col> 
             </FormGroup>
@@ -156,22 +156,22 @@ export class JournalNew extends React.Component {
         </Panel>
       </Accordion>
 
-      <ButtonGroup className="pull-right">
+      <ButtonGroup className='pull-right'>
           <Button
-            type="button"
+            type='button'
             disabled={this.props.submitting}
             onClick={()=>{this.props.dispatch(closeNewJournalPage())}}>
             Close
           </Button>
         <Button
-          type="reset"
+          type='reset'
           disabled={this.props.pristine || this.props.submitting}>
           Reset
         </Button>
         <Button
-          type="submit"
+          type='submit'
           disabled={this.props.pristine || this.props.submitting}
-          bsStyle="primary">
+          bsStyle='primary'>
           Create
         </Button>
       </ButtonGroup>
@@ -186,8 +186,8 @@ const mapStateToProps = state => {
         loggedIn: currentUser !== null,
         user: state.user.data,
         initialValues: {
-//          title: "testtitle",
-//          journalText: "testjournaltext",
+//          title: 'testtitle',
+//          journalText: 'testjournaltext',
           timestamp: new Date().toJSON().slice(0,19),
 //          doctorCheckbox: true,
 //          importantCheckbox: true

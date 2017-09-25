@@ -14,12 +14,12 @@ export class SmallJournal extends React.Component {
   render() {
     return(
       <Panel header={titlePanel}>
-        {this.props.count} page{this.props.count === 1 ? '' : 's'}.
-        <ButtonGroup className="pull-right">
-          <LinkContainer to="/Journal">
+        {this.props.total} page{this.props.total === 1 ? '' : 's'}.
+        <ButtonGroup className='pull-right'>
+          <LinkContainer to='/Journal'>
             <Button>View</Button>
           </LinkContainer>
-          <LinkContainer to="/Journal">
+          <LinkContainer to='/Journal'>
             <Button onClick={()=>{this.props.dispatch(openNewJournalPage())}}>New</Button>
           </LinkContainer>
         </ButtonGroup >
@@ -31,7 +31,7 @@ export class SmallJournal extends React.Component {
 const mapStateToProps = state => {
     const journalData = state.journal;
     return {
-        count: journalData.data.count,
+        total: journalData.data.total,
     };
 };
 

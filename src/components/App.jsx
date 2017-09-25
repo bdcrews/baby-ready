@@ -7,7 +7,7 @@ import UserData from './UserData'
 import Journal from './Journal'
 import NavBar from './NavBar'
 import PopUp from './PopUp'
-import './App.css';
+import Help from './Help'
 import {refreshAuthToken} from '../actions/auth';
 
 export class App extends React.Component {
@@ -51,14 +51,15 @@ export class App extends React.Component {
   render() {
     return (
     <Router>
-      <div className="App">
+      <div className='App'>
         <NavBar />
         <PopUp />
-        <div className="container">
-  		    <Route exact path="/" component={Landing} />
-          <Route exact path="/Dashboard" component={Dashboard} />
-          <Route exact path="/UserData" component={UserData} />
-          <Route exact path="/Journal" component={Journal} />
+        <div className='container'>
+  		    <Route exact path='/' component={Landing} />
+          <Route exact path='/Dashboard' component={Dashboard} />
+          <Route exact path='/UserData' component={UserData} />
+          <Route exact path='/Journal' component={Journal} />
+          <Route exact path='/Help' component={Help} />
         </div>
       </div>
     </Router>

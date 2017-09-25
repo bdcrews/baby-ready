@@ -20,8 +20,8 @@ export class SmallUserData extends React.Component {
       const dueDate = dd ? moment(dd) : moment(lmd).add(240,'days');
 
       return(
-        <ListGroupItem className="centerText">
-          <strong className="dueDateBanner">{dueDate.fromNow(true)}</strong><br/>
+        <ListGroupItem className='centerText'>
+          <strong className='dueDateBanner'>{dueDate.fromNow(true)}</strong><br/>
           <small> Due: {dueDate.format('MMMM Do YYYY')}</small>
         </ListGroupItem>
       );
@@ -33,7 +33,7 @@ export class SmallUserData extends React.Component {
   createDoctor() {
     if (this.props.docName) {
       return(
-        <ListGroupItem header={"Dr. " + this.props.docName}>
+        <ListGroupItem header={'Dr. ' + this.props.docName}>
           {this.props.docPhone}
         </ListGroupItem>
       );
@@ -45,7 +45,7 @@ export class SmallUserData extends React.Component {
   createBloodtype() {
     if (this.props.bloodType) {
       return(
-        <ListGroupItem header="Bloodtype">
+        <ListGroupItem header='Bloodtype'>
           {this.props.bloodType} {this.props.rhFactor}
         </ListGroupItem>
       );
@@ -57,7 +57,7 @@ export class SmallUserData extends React.Component {
   createNotes() {
     if (this.props.userNotes) {
       return(
-        <ListGroupItem header="Notes">
+        <ListGroupItem header='Notes'>
           {this.props.userNotes}
         </ListGroupItem>
       );
@@ -75,7 +75,7 @@ export class SmallUserData extends React.Component {
           {this.createBloodtype()}
           {this.createNotes()}
         </ListGroup>
-        <LinkContainer to="/UserData" className="pull-right">
+        <LinkContainer to='/UserData' className='pull-right'>
           <Button >Update</Button>
         </LinkContainer>
       </Panel>

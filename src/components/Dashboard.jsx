@@ -2,7 +2,6 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import {Grid, Row, Col} from 'react-bootstrap';
-import './Dashboard.css';
 import {fetchUserData} from '../actions/users';
 import {fetchJournal} from '../actions/journal';
 import SmallUserData from './SmallUserData';
@@ -21,13 +20,13 @@ export class Dashboard extends React.Component {
   render() {
     // Only visible to logged in users
     if (!this.props.loggedIn) {
-        return <Redirect to="/" />;
+        return <Redirect to='/' />;
     }
     
     return (
       <section>
         <Grid fluid>
-          <Row className="show-grid">
+          <Row className='show-grid'>
             <Col xs={12} sm={6} md={6}>
               <SmallUserData />
             </Col>

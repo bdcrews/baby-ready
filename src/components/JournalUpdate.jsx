@@ -17,7 +17,7 @@ import {Field} from 'redux-form';
 
 export class JournalUpdate extends React.Component {
   onSubmit(value) {
-    let popup = {
+    const popup = {
       status: 'updating',
       title: 'Updating journal',
       description: 'Please wait. Updating user data',
@@ -26,7 +26,7 @@ export class JournalUpdate extends React.Component {
     this.props.dispatch(openPopUp(popup));
 
     // dispatch to update the api
-    let record = {
+    const record = {
       username: this.props.username,
       title: value.title,
       journalText: value.journalText,
@@ -50,7 +50,7 @@ export class JournalUpdate extends React.Component {
     let error;
     if (this.props.error) {
       error = (
-        <div className="form-error" aria-live="polite">
+        <div className='form-error' aria-live='polite'>
           {this.props.error}
         </div>
       );
@@ -63,33 +63,33 @@ export class JournalUpdate extends React.Component {
       onReset={this.props.reset}
       horizontal>
       {error}
-      <FormGroup controlId="formControlsUserName">
-        <FormControl componentClass={Field} component="input" 
-              name="title"
-              type="text"
-              label="Title"
-              placeholder="Title"
+      <FormGroup controlId='formControlsUserName'>
+        <FormControl componentClass={Field} component='input' 
+              name='title'
+              type='text'
+              label='Title'
+              placeholder='Title'
         />
       </FormGroup>
-      <FormGroup controlId="formControlsUserName">
-        <FormControl componentClass={Field} component="textarea" 
-              name="journalText"
-              type="textarea"
-              label="JournalText"
-              placeholder="Type here"
+      <FormGroup controlId='formControlsUserName'>
+        <FormControl componentClass={Field} component='textarea' 
+              name='journalText'
+              type='textarea'
+              label='JournalText'
+              placeholder='Type here'
         />
       </FormGroup> 
 
       <Accordion>
-        <Panel header="details" eventKey="1" bsStyle="primary">
+        <Panel header='details' eventKey='1' bsStyle='primary'>
           <FormGroup>  
             <Col componentClass={ControlLabel} sm={2}>
               Date: 
             </Col>    
             <Col sm={10}> 
-              <FormControl componentClass={Field} component="input" 
-                name="timestamp"
-                type="datetime-local"
+              <FormControl componentClass={Field} component='input' 
+                name='timestamp'
+                type='datetime-local'
               />
             </Col> 
           </FormGroup> 
@@ -97,7 +97,7 @@ export class JournalUpdate extends React.Component {
             <Col sm={2}>
             </Col>    
             <Col sm={10}> 
-              <Field name="doctorCheckbox" component="input" type="checkbox"/>
+              <Field name='doctorCheckbox' component='input' type='checkbox'/>
               {'  '}
               <ControlLabel>Doctor visit</ControlLabel>
             </Col>
@@ -106,7 +106,7 @@ export class JournalUpdate extends React.Component {
             <Col sm={2}>
             </Col>    
             <Col sm={10}> 
-              <Field name="importantCheckbox" component="input" type="checkbox"/>
+              <Field name='importantCheckbox' component='input' type='checkbox'/>
               {'  '}
               <ControlLabel>Important</ControlLabel>
             </Col>
@@ -117,26 +117,26 @@ export class JournalUpdate extends React.Component {
               Weight: 
             </Col> 
             <Col sm={10}>      
-              <FormControl componentClass={Field} component="input"  
-                  name="weight"
-                  type="number"
-                  min="0"
-                  max="1000"
+              <FormControl componentClass={Field} component='input'  
+                  name='weight'
+                  type='number'
+                  min='0'
+                  max='1000'
               />
             </Col> 
           </FormGroup>
 
-          <Panel header="Blood Pressure" >
+          <Panel header='Blood Pressure' >
             <FormGroup>
               <Col componentClass={ControlLabel} sm={2}>
                 Top Number (Systolic): 
               </Col> 
               <Col sm={10}>      
-                <FormControl componentClass={Field} component="input"  
-                    name="systolic"
-                    type="number"
-                    min="0"
-                    max="1000"
+                <FormControl componentClass={Field} component='input'  
+                    name='systolic'
+                    type='number'
+                    min='0'
+                    max='1000'
                 />
               </Col> 
             </FormGroup>
@@ -145,11 +145,11 @@ export class JournalUpdate extends React.Component {
                 Bottom Number (Diastolic): 
               </Col> 
               <Col sm={10}>      
-                <FormControl componentClass={Field} component="input"  
-                    name="diastolic"
-                    type="number"
-                    min="0"
-                    max="1000"
+                <FormControl componentClass={Field} component='input'  
+                    name='diastolic'
+                    type='number'
+                    min='0'
+                    max='1000'
                 />
               </Col> 
             </FormGroup>
@@ -157,29 +157,33 @@ export class JournalUpdate extends React.Component {
         </Panel>
       </Accordion>
 
-      <ButtonGroup className="pull-right">
+      <ButtonGroup className='pull-right'>
           <Button
-            type="button"
+            type='button'
             disabled={this.props.submitting}
             onClick={() => this.props.dispatch(closeUpdateJournalPage())}>
             Cancel
           </Button>
         <Button
-          type="reset"
+          type='reset'
           disabled={this.props.pristine || this.props.submitting}>
           Reset
         </Button>
         <Button
-          type="button"
+          type='button'
           disabled={this.props.submitting}
-          onClick={() => this.props.dispatch(deleteJournalPage(this.props.journal.singleJournal.id))}
-          bsStyle="danger">
+          onClick={() => {
+            if(window.confirm('Are you sure you want to delete this page?')) {
+              this.props.dispatch(deleteJournalPage(this.props.journal.singleJournal.id));
+            }
+          }}
+          bsStyle='danger'>
           Delete
         </Button>
         <Button
-          type="submit"
+          type='submit'
           disabled={this.props.pristine || this.props.submitting}
-          bsStyle="primary">
+          bsStyle='primary'>
           Update
         </Button>
       </ButtonGroup>

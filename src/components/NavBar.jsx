@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Navbar, NavDropdown, MenuItem, Nav} from 'react-bootstrap';
+import {Navbar, NavDropdown, MenuItem, Nav, Glyphicon} from 'react-bootstrap';
 import './NavBar.css';
 import LoginForm from './LoginForm'
 import {setCurrentUser, setAuthToken} from '../actions/auth';
@@ -18,37 +18,40 @@ export class NavBar extends React.Component {
   render() {
     let menuOptions;
     if(!this.props.loggedIn) {
+//onClick={()=>{document.getElementById('menuId').style.height = 0; console.log('here');}}
     	menuOptions = (
-        <Navbar.Form pullRight>
-        <LoginForm />
+        <Navbar.Form pullRight >
+          <LoginForm/>
         </Navbar.Form >
       );
     }
     else {
     	menuOptions = (
         <Nav pullRight>
-        <NavDropdown title={this.props.name} eventKey={2} id="basic-nav-dropdown" pullRight>
-          <MenuItem header>Account</MenuItem>
-          <MenuItem divider />
-          <LinkContainer to="/Dashboard"><MenuItem eventKey={2.1} >Dashboard</MenuItem></LinkContainer>
-          <LinkContainer to="/UserData"><MenuItem eventKey={2.2} >User data</MenuItem></LinkContainer>
-          <LinkContainer to="/Journal"><MenuItem eventKey={2.3} >Open journal</MenuItem></LinkContainer>
-          <MenuItem divider />
-          <MenuItem eventKey={2.2} onClick={() => this.logOut()}>Logout</MenuItem>
-        </NavDropdown>
+          <NavDropdown title='Menu' eventKey={2} id='basic-nav-dropdown' pullRight>
+            <MenuItem header>{this.props.name}</MenuItem>
+            <MenuItem divider />
+            <LinkContainer to='/Help'><MenuItem eventKey={2.1} ><Glyphicon glyph='glyphicon glyphicon-question-sign' /> Help </MenuItem></LinkContainer>
+            <MenuItem divider />
+            <LinkContainer to='/Dashboard'><MenuItem eventKey={2.2} >Dashboard</MenuItem></LinkContainer>
+            <LinkContainer to='/UserData'><MenuItem eventKey={2.3} >User data</MenuItem></LinkContainer>
+            <LinkContainer to='/Journal'><MenuItem eventKey={2.4} >Open journal</MenuItem></LinkContainer>
+            <MenuItem divider />
+            <MenuItem eventKey={2.2} onClick={() => this.logOut()}><strong>Logout</strong></MenuItem>
+          </NavDropdown>
         </Nav>
       );
     }
 
     return (
-      <Navbar fixedTop collapseOnSelect className="NavBar">
+      <Navbar fixedTop collapseOnSelect className='NavBar'>
         <Navbar.Header>
           <Navbar.Brand>
             <a >Baby Ready</a>
           </Navbar.Brand>
     			<Navbar.Toggle />
         </Navbar.Header>
-        <Navbar.Collapse>
+        <Navbar.Collapse id='menuId'>
           {menuOptions}
         </Navbar.Collapse>
       </Navbar>

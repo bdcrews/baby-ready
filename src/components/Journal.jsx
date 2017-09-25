@@ -27,7 +27,7 @@ export class Journal extends React.Component {
   render() {
     //Only visible to logged in users
     if (!this.props.loggedIn) {
-        return <Redirect to="/" />;
+        return <Redirect to='/' />;
     }
     if(this.props.journal.updatingPage) {
         return (<JournalUpdate/>)
@@ -41,7 +41,7 @@ export class Journal extends React.Component {
     let error;
     if (this.props.error) {
       error = (
-        <div className="form-error" aria-live="polite">
+        <div className='form-error' aria-live='polite'>
           {this.props.error}
         </div>
       );
@@ -58,8 +58,8 @@ export class Journal extends React.Component {
           <td>{page.systolic}/{page.diastolic}</td>
           <td>{moment(page.timestamp).calendar()}</td>
           <td>
-            {page.doctorCheckbox ? (<Image src="/docicon.png" rounded />) : ''}
-            {page.importantCheckbox ? (<Image src="/important.png" rounded />) : ''}
+            {page.doctorCheckbox ? (<Image src='/docicon.png' rounded />) : ''}
+            {page.importantCheckbox ? (<Image src='/important.png' rounded />) : ''}
           </td>
         </tr>
       )
@@ -96,25 +96,11 @@ export class Journal extends React.Component {
           activePage={this.props.journal.activePage}
           onSelect={this.handleSelect.bind(this)} />
 
-          <br/>
-          <ButtonGroup className="pull-right">
-            <Button onClick={()=>{this.props.dispatch(openNewJournalPage())}}>New</Button>
-            <LinkContainer to="/Dashboard"><Button>return</Button></LinkContainer>
-          </ButtonGroup>
-        </div>
-
-/*
-        //this.props.journal.data[0].
-      username: this.props.username,
-      title: value.title,
-      journalText: value.journalText,
-      timestamp: value.timestamp,
-      doctorCheckbox: value.doctorCheckbox,
-      importantCheckbox: value.importantCheckbox,
-      weight: value.weight,
-      systolic: value.systolic,
-      diastolic: value.diastolic
-*/
+        <ButtonGroup className='pull-right'>
+          <Button onClick={()=>{this.props.dispatch(openNewJournalPage())}}>New</Button>
+          <LinkContainer to='/Dashboard'><Button>return</Button></LinkContainer>
+        </ButtonGroup>
+      </div>
     );
 	}
 }

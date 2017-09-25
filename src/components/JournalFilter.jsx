@@ -8,7 +8,8 @@ import {Button,
   Panel,
   ButtonGroup,
   Col,
-  Accordion} from 'react-bootstrap';
+  Accordion,
+  Glyphicon} from 'react-bootstrap';
 import {reduxForm} from 'redux-form';
 import {filterJournal} from '../actions/journal';
 import {Field} from 'redux-form';
@@ -17,9 +18,9 @@ export class JournalFilter extends React.Component {
   onSubmit(value) {
     // dispatch to update the api
     const filter = {};
-    if(value.titleFilter!=='') filter['title'] = value.titleFilter;
-    if(value.docVisitFilter!=='any') filter['doctorCheckbox'] = value.docVisitFilter === "Yes";
-    if(value.importantFilter!=='any') filter['importantCheckbox'] = value.importantFilter === "Yes";
+    if(typeof value.titleFilter !== 'undefined') filter['title'] = value.titleFilter;
+    if(value.doctorCheckbox!=='any') filter['doctorCheckbox'] = value.doctorCheckbox === 'true';
+    if(value.importantCheckbox!=='any') filter['importantCheckbox'] = value.importantCheckbox === 'true';
 
     return this.props.dispatch(filterJournal(filter));
   }
@@ -28,12 +29,13 @@ export class JournalFilter extends React.Component {
     let error;
     if (this.props.error) {
       error = (
-        <div className="form-error" aria-live="polite">
+        <div className='form-error' aria-live='polite'>
           {this.props.error}
         </div>
       );
     }
 
+    const filterHeader = (<span>filter <Glyphicon glyph='glyphicon glyphicon glyphicon-chevron-down' /> </span>);
     return (
     <Form 
       className='JournalFilterForm' 
@@ -43,17 +45,17 @@ export class JournalFilter extends React.Component {
       {error}
 
       <Accordion>
-        <Panel header="filter" eventKey="1" bsStyle="primary">
+        <Panel header={filterHeader} eventKey='1' bsStyle='primary'>
 
           <FormGroup> 
             <Col componentClass={ControlLabel} sm={3}>
                 Title:
             </Col>    
             <Col sm={9}> 
-              <FormControl componentClass={Field} component="input" 
-                    name="titleFilter"
-                    placeholder="filter by page title"
-                    label="Title"
+              <FormControl componentClass={Field} component='input' 
+                    name='titleFilter'
+                    placeholder='filter by page title'
+                    label='Title'
               />
             </Col> 
           </FormGroup>
@@ -65,15 +67,15 @@ export class JournalFilter extends React.Component {
               </ControlLabel>
             </Col>    
             <Col sm={9}> 
-              <ControlLabel><Field name="docVisitFilter" component="input" type="radio" value="Yes"/>{' '}
+              <ControlLabel><Field name='doctorCheckbox' component='input' type='radio' value='true'/>{' '}
                 Yes
               </ControlLabel>
                 {' '}
-              <ControlLabel><Field name="docVisitFilter" component="input" type="radio" value="No"/>{' '}
+              <ControlLabel><Field name='doctorCheckbox' component='input' type='radio' value='false'/>{' '}
                 No
               </ControlLabel>
                 {' '}
-              <ControlLabel><Field name="docVisitFilter" component="input" type="radio" value="any"/>{' '}
+              <ControlLabel><Field name='doctorCheckbox' component='input' type='radio' value='any'/>{' '}
                 any{' '}
               </ControlLabel>
             </Col> 
@@ -86,30 +88,30 @@ export class JournalFilter extends React.Component {
               </ControlLabel>
             </Col>    
             <Col sm={9}> 
-              <ControlLabel><Field name="importantFilter" component="input" type="radio" value="Yes"/>{' '}
+              <ControlLabel><Field name='importantCheckbox' component='input' type='radio' value='true'/>{' '}
                 Yes
               </ControlLabel>
                 {' '}
-              <ControlLabel><Field name="importantFilter" component="input" type="radio" value="No"/>{' '}
+              <ControlLabel><Field name='importantCheckbox' component='input' type='radio' value='false'/>{' '}
                 No
               </ControlLabel>
                 {' '}
-              <ControlLabel><Field name="importantFilter" component="input" type="radio" value="any"/>{' '}
+              <ControlLabel><Field name='importantCheckbox' component='input' type='radio' value='any'/>{' '}
                 any{' '}
               </ControlLabel>
             </Col> 
           </FormGroup>
 
-          <ButtonGroup className="pull-right">
+          <ButtonGroup className='pull-right'>
             <Button
-              type="reset"
+              onClick={this.props.reset}
               disabled={this.props.pristine || this.props.submitting}>
               Reset
             </Button>
             <Button
-              type="submit"
+              type='submit'
               disabled={this.props.pristine || this.props.submitting}
-              bsStyle="primary">
+              bsStyle='primary'>
               Filter
             </Button>
           </ButtonGroup>
@@ -121,24 +123,26 @@ export class JournalFilter extends React.Component {
 }
 
 const mapStateToProps = state => {
+  const initialValues = {
+    doctorCheckbox: 'any',
+    importantCheckbox: 'any'
+  };
+  if('title' in state.journal.filter) initialValues['titleFilter'] = state.journal.filter.title;
+  if('doctorCheckbox' in state.journal.filter) initialValues['doctorCheckbox'] = state.journal.filter.doctorCheckbox.toString();
+  if('importantCheckbox' in state.journal.filter) initialValues['importantCheckbox'] = state.journal.filter.importantCheckbox.toString();
+
     const {currentUser} = state.auth;
     return {
         loggedIn: currentUser !== null,
         user: state.user.data,
-        initialValues: {
-          titleFilter: state.journal.filter.title,
-          docVisitFilter: state.journal.filter.doctorCheckbox || 'any',
-          importantFilter: state.journal.filter.importantCheckbox || 'any'
-        },
+        initialValues: initialValues,
         username: state.user.data.username
     };
 };
 
 const reduxJournalFilter = reduxForm({
     form: 'JournalFilter',
-    onSubmitFail: (errors, dispatch) => {
-      //dispatch(focus('JournalFilter', Object.keys(errors)[0]));
-    }
+    enableReinitialize: true
   })(JournalFilter)
 
 const ConnectedJournalFilter = connect(

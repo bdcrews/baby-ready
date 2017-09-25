@@ -1,9 +1,11 @@
-p.forgotLogin {
-	text-align:center;
-	display:block;
+a.loginLink  {
+	color: white;
 }
 
 .loginButton {
 	margin-top: 20px;
 }
 
+fieldgroup {
+	width: 90px;
+}

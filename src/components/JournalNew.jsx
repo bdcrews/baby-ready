@@ -9,7 +9,8 @@ import {Button,
   Panel,
   ButtonGroup,
   Col,
-  Accordion} from 'react-bootstrap';
+  Accordion,
+  Glyphicon} from 'react-bootstrap';
 import {reduxForm, focus} from 'redux-form';
 import {openPopUp} from '../actions/pop-up';
 import {newJournal, closeNewJournalPage} from '../actions/journal';
@@ -55,6 +56,8 @@ export class JournalNew extends React.Component {
       );
     }
 
+    const detailsHeader = (<span>details <Glyphicon glyph='glyphicon glyphicon glyphicon-chevron-down' /> </span>);
+    
     return (
     <Form 
       className='JournalForm' 
@@ -80,7 +83,7 @@ export class JournalNew extends React.Component {
       </FormGroup> 
 
       <Accordion>
-        <Panel header='details' eventKey='1' bsStyle='primary'>
+        <Panel header={detailsHeader} eventKey='1' bsStyle='primary'>
           <FormGroup>  
             <Col componentClass={ControlLabel} sm={2}>
               Date: 

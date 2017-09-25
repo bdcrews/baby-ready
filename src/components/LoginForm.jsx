@@ -45,7 +45,7 @@ export class LoginForm extends React.Component {
         <br />
         <ButtonGroup bsSize="xsmall" className="pull-right">
           <Button href='#register' bsStyle="info">sign up </Button>
-          <Button href='#register' bsStyle="info"> demo </Button>
+          <Button href='#demo' bsStyle="info"> demo </Button>
         </ButtonGroup>
       </form>
     );

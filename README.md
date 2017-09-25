@@ -4,23 +4,20 @@
 
 ## Getting started
 ### Installing
-```
-`git clone https://github.com/bdcrews/baby-ready`
-`cd baby-ready`
-`npm install`
-`git clone https://github.com/bdcrews/baby-ready-server`
-`cd baby-ready`
-`npm install`
-```
+
+1. `git clone https://github.com/bdcrews/baby-ready`
+2. `cd baby-ready`
+3. `npm install`
+4. `git clone https://github.com/bdcrews/baby-ready-server`
+5. `cd baby-ready`
+6. `npm install`
+
 ### Launching
-```
->   `npm start` (both projects)
-```
+`npm start` (both projects)
+
 Then open [`localhost:3000`](http://localhost:3000) in a browser.
 ### Testing
-```
->   `npm run test`
-```
+`npm run test`
 
 <h2>Introduction</h2>
 <p>Baby Ready helps soon to be moms stay organized during their pregnancy by giving them a convient place to save, view, and update important information.  The app gives helpful tips and has a journal for new moms fill out.</p>

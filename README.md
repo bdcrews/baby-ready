@@ -4,20 +4,35 @@
 
 ## Getting started
 ### Installing
-
-1. `git clone https://github.com/bdcrews/baby-ready`
-2. `cd baby-ready`
-3. `npm install`
-4. `git clone https://github.com/bdcrews/baby-ready-server`
-5. `cd baby-ready`
-6. `npm install`
+* Install [node](http://nodejs.org/).
+* Install [mongo](http://www.mongodb.com/).
+* Create an environment variable called `JWT_SECRET`
+```
+> git clone https://github.com/bdcrews/baby-ready
+> cd baby-ready
+> npm install
+> cd ..
+> git clone https://github.com/bdcrews/baby-ready-server
+> cd baby-ready-server
+> npm install
+```
 
 ### Launching
-`npm start` (both projects)
+```
+> cd baby-ready
+> npm start
+> cd ../baby-ready-server
+> npm start
+```
 
 Then open [`localhost:3000`](http://localhost:3000) in a browser.
 ### Testing
-`npm run test`
+```
+> cd baby-ready
+> npm run test
+> cd ../baby-ready-server
+> npm run test
+```
 
 <h2>Introduction</h2>
 <p>Baby Ready helps soon to be moms stay organized during their pregnancy by giving them a convient place to save, view, and update important information.  The app gives helpful tips and has a journal for new moms fill out.</p>

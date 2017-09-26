@@ -1,0 +1,17 @@
+a.anchor {
+    display: block;
+    position: relative;
+    top: -93px;
+    visibility: hidden;
+    height: 0px;
+}
+
+@media (max-width: 768px) {
+	a.anchor {
+	    display: block;
+	    position: relative;
+	    top: -320px;
+	    visibility: hidden;
+	    height: 0px;
+	}
+}

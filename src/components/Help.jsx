@@ -39,7 +39,7 @@ export class Help extends React.Component {
         </Panel>
         <Panel header={titleDashboard}>
           <Col sm={6}>
-            The dashboard page is the first page you see after login onto the site.  It gives you quick access to your info, tips for your pregnancy, and quick access to the Journal.
+            The dashboard page is the first page you see after logging onto the site.  It gives you quick access to your info, tips for your pregnancy, and quick access to the Journal.
             <br /><br />
           </Col>
           <Col sm={6}>

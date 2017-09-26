@@ -18,7 +18,6 @@ export class NavBar extends React.Component {
   render() {
     let menuOptions;
     if(!this.props.loggedIn) {
-//onClick={()=>{document.getElementById('menuId').style.height = 0; console.log('here');}}
     	menuOptions = (
         <Navbar.Form pullRight >
           <LoginForm/>

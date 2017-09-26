@@ -12,6 +12,7 @@
   "author": "Brandon Crews",
   "license": "ISC",
   "dependencies": {
+    "bootswatch": "^3.3.7",
     "jwt-decode": "^2.2.0",
     "moment": "^2.18.1",
     "react": "^15.6.1",

@@ -3,11 +3,12 @@ import {connect} from 'react-redux';
 import {Panel, PageHeader, Image, Col, ListGroup, ListGroupItem} from 'react-bootstrap';
 import Registration from './Registration'
 import {Redirect} from 'react-router-dom';
+import './Landing.css';
 
 const descriptionTitle1 = (<h3>Store and Quickly view important stats</h3>);
 const descriptionTitle2 = (<h3>Record and view your pregnancy journal</h3>);
 const descriptionTitle3 = (<h3>Get useful tips</h3>);
-const descriptionTitle4 = (<h3><a name='demo'>Demo</a></h3>);
+const descriptionTitle4 = (<h3>Demo</h3>);
 
 export class Landing extends React.Component {
   render() {
@@ -57,15 +58,17 @@ export class Landing extends React.Component {
         </Col>
       </Panel>
 
+      <a name='demo' className='anchor'>-</a>
       <Panel header={descriptionTitle4}>
         <ListGroup>
           Thank you for using Baby Ready.  To view a demo please enter the following credentials:
-          <br />
+          <br /><br />
           <ListGroupItem>User Name: <strong>demo@mail.com</strong></ListGroupItem>
           <ListGroupItem>Password: <strong>brpassword</strong></ListGroupItem>
         </ListGroup>
       </Panel>
-      <a name='register'><Registration /></a>
+      <a name='register' className='anchor'>-</a>
+      <Registration />
       
     </section>
     );  

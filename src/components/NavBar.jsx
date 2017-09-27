@@ -1,8 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Navbar, NavDropdown, MenuItem, Nav, Glyphicon} from 'react-bootstrap';
+import NavbarForm from './NavbarForm';
 import './NavBar.css';
-import LoginForm from './LoginForm'
 import {setCurrentUser, setAuthToken} from '../actions/auth';
 import {clearAuthToken} from '../local-storage';
 import {LinkContainer} from 'react-router-bootstrap';
@@ -18,11 +18,7 @@ export class NavBar extends React.Component {
   render() {
     let menuOptions;
     if(!this.props.loggedIn) {
-    	menuOptions = (
-        <Navbar.Form pullRight >
-          <LoginForm/>
-        </Navbar.Form >
-      );
+    	menuOptions = <NavbarForm />;
     }
     else {
     	menuOptions = (
@@ -55,7 +51,7 @@ export class NavBar extends React.Component {
         </Navbar.Collapse>
       </Navbar>
     );
-  }  
+  }
 }
 
 const mapStateToProps = state => {
@@ -70,4 +66,3 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps)(NavBar);
-

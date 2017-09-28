@@ -55,7 +55,8 @@ export class LoginForm extends React.Component {
 export default reduxForm({
     form: 'login',
     onSubmitSuccess: (result, dispatch, props) => {
-      props.toggleCollapse();
+      // on smaller screens this will collapse the navbar when loggin in
+      if((typeof(window) !== 'undefined') && (window.innerWidth < 768)) props.toggleCollapse();
     },
     onSubmitFail: (errors, dispatch) => {
       dispatch(focus('login', Object.keys(errors)[0]));

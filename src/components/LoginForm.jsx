@@ -49,11 +49,14 @@ export class LoginForm extends React.Component {
         </ButtonGroup>
       </form>
     );
-  }  
+  }
 }
 
 export default reduxForm({
     form: 'login',
+    onSubmitSuccess: (result, dispatch, props) => {
+      props.toggleCollapse();
+    },
     onSubmitFail: (errors, dispatch) => {
       dispatch(focus('login', Object.keys(errors)[0]));
     }

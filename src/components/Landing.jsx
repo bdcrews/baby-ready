@@ -1,13 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {Panel, PageHeader, Image, Col, ListGroup, ListGroupItem} from 'react-bootstrap';
+import {Panel, PageHeader, Image, Col} from 'react-bootstrap';
 import Registration from './Registration'
 import {Redirect} from 'react-router-dom';
 
 const descriptionTitle1 = (<h3>Store and Quickly view important stats</h3>);
 const descriptionTitle2 = (<h3>Record and view your pregnancy journal</h3>);
 const descriptionTitle3 = (<h3>Get useful tips</h3>);
-const descriptionTitle4 = (<h3>Demo</h3>);
 
 export class Landing extends React.Component {
   render() {

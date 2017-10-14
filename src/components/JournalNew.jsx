@@ -17,6 +17,12 @@ import {newJournal, closeNewJournalPage} from '../actions/journal';
 import {Field} from 'redux-form';
 
 export class JournalNew extends React.Component {
+  handleKeyUp(e) {
+      const el = e.target;
+      el.style.height = "5px";
+      el.style.height = (el.scrollHeight + 4)+"px";
+  }
+
   onSubmit(value) {
     let popup = {
       status: 'updating',
@@ -74,7 +80,7 @@ export class JournalNew extends React.Component {
         />
       </FormGroup>
       <FormGroup controlId='formControlsUserName'>
-        <FormControl componentClass={Field} component='textarea' 
+        <FormControl componentClass={Field} component='textarea' onKeyUp={this.handleKeyUp}
               name='journalText'
               type='textarea'
               label='JournalText'

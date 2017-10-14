@@ -1,7 +1,6 @@
 import React from 'react';
-import './LoginForm.css';
 import {reduxForm, focus} from 'redux-form';
-import {Button, ButtonGroup} from 'react-bootstrap';
+import {Button} from 'react-bootstrap';
 import {login} from '../actions/auth';
 import FieldGroup from './FieldGroup'
 import {required, nonEmpty, isTrimmed, email} from '../validators';
@@ -40,13 +39,7 @@ export class LoginForm extends React.Component {
           placeholder=''
           validate={[required, nonEmpty, isTrimmed]}
         />
-        {' '}
-        <Button className='loginButton'  disabled={this.props.pristine || this.props.submitting} type='submit'>Log In</Button>
-        <br />
-        <ButtonGroup bsSize="xsmall" className="pull-right">
-          <Button href='#register' bsStyle="info">sign up </Button>
-          <Button href='#demo' bsStyle="info"> demo </Button>
-        </ButtonGroup>
+        {' '}<Button className='loginButton' bsSize="small" disabled={this.props.pristine || this.props.submitting} type='submit'>Log In</Button>
       </form>
     );
   }

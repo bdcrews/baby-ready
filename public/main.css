@@ -1,0 +1,165 @@
+body {
+    background-image: url("background1.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;   
+    background-position: left top;
+    background-size: cover;
+}
+
+/* text styles */
+#BR div, #BR p {
+	font-family: 'Quicksand', sans-serif;
+
+}
+
+#BR h1,
+#BR h1 span,
+#BR h2,
+#BR h3,
+#BR h4,
+#BR h5,
+#BR h6,
+#BR .dueDateBanner {
+	font-family: 'Architects Daughter', cursive;
+}
+
+#BR h2,
+#BR h5,
+#BR h6,
+#BR .panel-heading {
+    text-shadow: 1px 1px 2px #000, 0 0 25px #fff;
+}
+#BR .panel-heading {
+    border: none;
+}
+
+#BR h1 small,
+#BR h1 span{
+    text-shadow: 0px 0px 25px #fff, 0px 0px 15px #fff, 2px 2px 1px rgba(0,0,0,.5);
+}
+#BR h4{
+    text-shadow: none;
+}
+#BR h1{
+    margin: 0;
+}
+
+#BR h1 span {
+margin: 11px 0 17px 0;
+}
+
+#BR h1 small:before { content: ' '; display: block; }
+
+
+/* header styles */
+#BR .page-header{
+	margin: 0 0 20px;
+    text-align: center;
+}
+
+/* button styles */
+#BR button {
+    background-color: #fff;
+}
+
+#BR button.navbar-toggle  {
+    background-color: rgba(255,255,255,.5);
+}
+
+#BR button.navbar-toggle:hover  {
+    background-color: rgba(255,255,255,.7);
+}
+#BR .btn,
+#BR .btn-group {
+  box-shadow: 4px 4px 2px rgba(0,0,0,.4);
+}
+#BR .btn-group .btn {
+  box-shadow: none;
+}
+#BR .btn-group {
+  border-radius: 4px;
+}
+
+/* layouts styles */
+#BR th {
+    text-align: center;
+}
+
+#BR .panel {
+border: none;
+background-color: rgba(255,255,255,.9);
+}
+
+#BR .panel,
+#BR .jumbotron {
+  box-shadow: 6px 6px 1px rgba(0,0,0,.4);
+}
+
+
+.loginButton {
+    margin-top: 20px;
+}
+
+a.anchor {
+    display: block;
+    position: relative;
+    top: -60px;
+    visibility: hidden;
+    height: 0px;
+}
+
+/* journal */
+#BR textarea {
+    min-height: 60px;
+    overflow-y: auto;
+    word-wrap:break-word;
+}
+
+#BR .pagination {
+    margin: auto;
+}
+
+#BR .nav>li {
+  display: inline-block;
+}
+
+#BR .form-control {
+    display: inline-block;
+}
+
+/* media queries */
+@media only screen and (max-width: 767px) {
+    #BR nav.NavBar  {
+        background-color: transparent;
+        box-shadow: none;
+        background-image: none;
+    }
+    #BR .navbar-collapse {
+        border: 0px;
+        border-color: transparent;
+        color: #eee;
+        margin: auto;
+        position: absolute;
+        top: 0;
+        width: 220px;
+        height: auto;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 40px 40px 0px 40px;
+        overflow: hidden;
+        border-radius: 0 0 12px 12px;
+        top: -40px;
+        text-align: center;
+        background-image: -webkit-linear-gradient(rgba(0,0,0,.1), rgba(256,256,256,.1) 60%,rgba(0,0,0,.1));
+        background-image: -o-linear-gradient(rgba(0,0,0,.1), rgba(256,256,256,.1) 60%,rgba(0,0,0,.1));
+        background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0,0,0,.1)), color-stop(60%, rgba(256,256,256,.1)), to(rgba(0,0,0,.1)));
+        background-image: linear-gradient(rgba(0,0,0,.1), rgba(256,256,256,.1) 60%,rgba(0,0,0,.1));
+        background-repeat: no-repeat;
+        box-shadow: 4px 4px 2px rgba(0,0,0,.4);
+    }
+
+    body {
+        position: relative;
+        top: -50px;
+    }
+}

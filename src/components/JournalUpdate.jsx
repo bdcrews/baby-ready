@@ -17,6 +17,20 @@ import {closeUpdateJournalPage, updateJournal, deleteJournalPage} from '../actio
 import {Field} from 'redux-form';
 
 export class JournalUpdate extends React.Component {
+  componentDidMount() {
+    var el = document.getElementById('formControlsText');
+    if(el) {
+      el.style.height = "5px";
+      el.style.height = (el.scrollHeight + 4)+"px";
+    }
+  }
+
+  handleKeyUp(e) {
+      const el = e.target;
+      el.style.height = "5px";
+      el.style.height = (el.scrollHeight + 4)+"px";
+  }
+
   onSubmit(value) {
     const popup = {
       status: 'updating',
@@ -66,7 +80,7 @@ export class JournalUpdate extends React.Component {
       onReset={this.props.reset}
       horizontal>
       {error}
-      <FormGroup controlId='formControlsUserName'>
+      <FormGroup controlId='formControlsTitle'>
         <FormControl componentClass={Field} component='input' 
               name='title'
               type='text'
@@ -74,8 +88,8 @@ export class JournalUpdate extends React.Component {
               placeholder='Title'
         />
       </FormGroup>
-      <FormGroup controlId='formControlsUserName'>
-        <FormControl componentClass={Field} component='textarea' 
+      <FormGroup controlId='formControlsText'>
+        <FormControl componentClass={Field} component='textarea' onKeyUp={this.handleKeyUp}
               name='journalText'
               type='textarea'
               label='JournalText'
@@ -203,7 +217,7 @@ const mapStateToProps = state => {
         initialValues: {
         title: state.journal.singleJournal ? state.journal.singleJournal.title : '',
         journalText: state.journal.singleJournal ? state.journal.singleJournal.journalText : '',
-        timestamp: state.journal.singleJournal ? state.journal.singleJournal.timestamp : '',
+        timestamp: state.journal.singleJournal ? state.journal.singleJournal.timestamp.substring(0, state.journal.singleJournal.timestamp.indexOf('.'))  : '',
         doctorCheckbox: state.journal.singleJournal ? state.journal.singleJournal.doctorCheckbox : '',
         weight: state.journal.singleJournal ? state.journal.singleJournal.weight : '',
         systolic: state.journal.singleJournal ? state.journal.singleJournal.systolic : '',

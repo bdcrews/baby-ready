@@ -5,7 +5,8 @@ import {Table,
   Image,
   Pagination,
   Button,
-  ButtonGroup} from 'react-bootstrap';
+  ButtonGroup,
+  PageHeader} from 'react-bootstrap';
 import {fetchJournal, setJournalPage, fetchOneJournal, openNewJournalPage} from '../actions/journal';
 import moment from 'moment';
 import JournalUpdate from './JournalUpdate'
@@ -68,6 +69,7 @@ export class Journal extends React.Component {
     return (
       <div>
         {error}
+        <PageHeader><span>Journal</span></PageHeader>
         <JournalFilter />
         <Table striped bordered condensed hover responsive>
           <thead>

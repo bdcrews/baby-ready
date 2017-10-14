@@ -8,6 +8,7 @@ import Journal from './Journal'
 import NavBar from './NavBar'
 import PopUp from './PopUp'
 import Help from './Help'
+import StyleTheme from './StyleTheme'
 import {refreshAuthToken} from '../actions/auth';
 
 export class App extends React.Component {
@@ -49,9 +50,12 @@ export class App extends React.Component {
   }
 
   render() {
+
     return (
     <Router>
-      <div className='App'>
+      <div id="BR" className='App'>
+        <StyleTheme />
+
         <NavBar />
         <PopUp />
         <div className='container'>

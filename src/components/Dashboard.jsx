@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
-import {Grid, Row, Col} from 'react-bootstrap';
+import {Grid, Row, Col, PageHeader} from 'react-bootstrap';
 import {fetchUserData} from '../actions/users';
 import {fetchJournal} from '../actions/journal';
 import SmallUserData from './SmallUserData';
@@ -25,6 +25,7 @@ export class Dashboard extends React.Component {
     
     return (
       <section>
+        <PageHeader><span>Baby Ready</span><small>Pregnancy Organizer</small></PageHeader>
         <Grid fluid>
           <Row className='show-grid'>
             <Col xs={12} sm={6} md={6}>

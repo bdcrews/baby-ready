@@ -26,7 +26,8 @@ export class PopUp extends React.Component {
           </Modal.Header>
 
           <Modal.Body>
-            {this.props.description}
+            {(this.props.status==='updating') ? (<span><i className="fa fa-spinner fa-pulse"/> updating...</span>) : ''}
+            {this.props.description}            
           </Modal.Body>
 
           <Modal.Footer>

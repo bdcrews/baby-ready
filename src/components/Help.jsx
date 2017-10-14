@@ -23,7 +23,7 @@ export class Help extends React.Component {
 
     return(
       <div>
-        <PageHeader>Help</PageHeader>
+        <PageHeader><span>Help</span></PageHeader>
         <Panel header={titleHelp}>
           <Col sm={4}>
             This is the help page.  It can be accessed anytime from the dropdown menu on the upper right.

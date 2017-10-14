@@ -28,7 +28,7 @@ export const fetchJournal = () => (dispatch, getState) => {
         activePage: getState().journal.activePage,
         pageQuantity: getState().journal.pageQuantity,
         sortfield: "timestamp",
-        sortdir: "desc"
+        sortdir: 1
     }
     if('title' in getState().journal.filter) query['title'] = getState().journal.filter.title;
     if('doctorCheckbox' in getState().journal.filter) query['doctorCheckbox'] = getState().journal.filter.doctorCheckbox;

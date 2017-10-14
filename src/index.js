@@ -6,6 +6,7 @@ import App from './components/App';
 import store from './store';
 import registerServiceWorker from './registerServiceWorker';
 import 'bootswatch/cerulean/bootstrap.min.css';
+import 'font-awesome/css/font-awesome.min.css';
 
 ReactDOM.render(
     <Provider store={store}>

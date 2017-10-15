@@ -14,12 +14,14 @@ export class NavBar extends React.Component {
   //
 
   logOut() {
+    this.scrollToAnchor('root');
     this.props.dispatch(setCurrentUser(null));
     this.props.dispatch(setAuthToken(null));
     clearAuthToken();
   }
 
   logInDemo() {
+    this.scrollToAnchor('root');
     return this.props.dispatch(login("demo@mail.com", "brpassword"));
   }
 
@@ -50,10 +52,10 @@ export class NavBar extends React.Component {
     else {
     	menuOptions = (
         <Nav pullRight>
-            <LinkContainer to='/Dashboard'>{this.createNavBarButton("Dashboard", "fa fa-home", 1)}</LinkContainer>
-            <LinkContainer to='/UserData'>{this.createNavBarButton("User data", "fa fa-user-o", 2)}</LinkContainer>
-            <LinkContainer to='/Journal'>{this.createNavBarButton("Journal", "fa fa-book", 3)}</LinkContainer>
-            <LinkContainer to='/Help'>{this.createNavBarButton("Help", "fa fa-question", 4)}</LinkContainer>
+            <LinkContainer to='/Dashboard'>{this.createNavBarButton("Dashboard", "fa fa-home", 1, () => {this.scrollToAnchor('root')})}</LinkContainer>
+            <LinkContainer to='/UserData'>{this.createNavBarButton("User data", "fa fa-user-o", 2, () => {this.scrollToAnchor('root')})}</LinkContainer>
+            <LinkContainer to='/Journal'>{this.createNavBarButton("Journal", "fa fa-book", 3, () => {this.scrollToAnchor('root')})}</LinkContainer>
+            <LinkContainer to='/Help'>{this.createNavBarButton("Help", "fa fa-question", 4, () => {this.scrollToAnchor('root')})}</LinkContainer>
             {this.createNavBarButton((<strong>Logout</strong>), "fa fa-sign-out", 5, () => this.logOut())}
         </Nav>
       );

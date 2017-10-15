@@ -7,7 +7,6 @@ import {Panel,
   } from 'react-bootstrap';
 import moment from 'moment';
 import {LinkContainer} from 'react-router-bootstrap';
-import './SmallUserData.css';
 
 const titlePanel = (<h3>User data</h3>);
 
@@ -18,10 +17,34 @@ export class SmallUserData extends React.Component {
 
     if((dd !== '') || (lmd !== '')) { 
       const dueDate = dd ? moment(dd) : moment(lmd).add(240,'days');
+      const now = moment();
+      const deltaDays = dueDate.diff(now, 'days');
+      const days = Math.abs(deltaDays%7);
+      const weeks = Math.abs(Math.floor(deltaDays%7));
+      let bannerText;      
+      if(deltaDays>0) {
+        if(weeks>0){
+          if(days>0){
+            bannerText = (<div>{weeks} weeks<br/>{days} days</div>);
+          }
+          else {
+            bannerText = (<div>{weeks} weeks</div>);
+          }
+        }
+        else { // weeks === 0
+          bannerText = (<div>{days} days</div>);
+        }
+      }
+      else if(deltaDays<0) {
+        bannerText= (<div>{dueDate.fromNow()}</div>);
+      }
+      else { // deltaDays === 0
+        bannerText= (<div>Today!!!</div>);
+      }
 
       return(
-        <ListGroupItem className='centerText'>
-          <strong className='dueDateBanner'>{dueDate.fromNow(true)}</strong><br/>
+        <ListGroupItem style={{"text-align": "center"}} className='centerText'>
+          <strong className='dueDateBanner'>{bannerText}</strong>
           <small> Due: {dueDate.format('MMMM Do YYYY')}</small>
         </ListGroupItem>
       );

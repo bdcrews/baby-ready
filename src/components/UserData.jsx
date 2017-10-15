@@ -66,7 +66,7 @@ export class UserData extends React.Component {
     let lmd = this.props.lastMenstration;
     let dd = this.props.dueDate;
     if(dd !== '' ) { return('Due date: ' + moment(dd).format('dddd, MMMM Do, YYYY'));}
-    if(lmd !== '') { return('Estimated due date: ' + moment(lmd).add(240,'days').format('dddd, MMMM Do, YYYY'));}
+    if(lmd !== '') { return('Estimated due date: ' + moment(lmd).add(280,'days').format('dddd, MMMM Do, YYYY'));}
     return('Enter a valid last menstration date or due date.');
   }
 

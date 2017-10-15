@@ -10,7 +10,8 @@ import {Button,
   ButtonGroup,
   Col,
   Accordion,
-  Glyphicon} from 'react-bootstrap';
+  Glyphicon,
+  PageHeader} from 'react-bootstrap';
 import {reduxForm, focus} from 'redux-form';
 import {openPopUp} from '../actions/pop-up';
 import {newJournal, closeNewJournalPage} from '../actions/journal';
@@ -65,126 +66,129 @@ export class JournalNew extends React.Component {
     const detailsHeader = (<span>details <Glyphicon glyph='glyphicon glyphicon glyphicon-chevron-down' /> </span>);
     
     return (
-    <Form 
-      className='JournalForm' 
-      onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}
-      onReset={this.props.reset}
-      horizontal>
-      {error}
-      <FormGroup controlId='formControlsUserName'>
-        <FormControl componentClass={Field} component='input' 
-              name='title'
-              type='text'
-              label='Title'
-              placeholder='Title'
-        />
-      </FormGroup>
-      <FormGroup controlId='formControlsUserName'>
-        <FormControl componentClass={Field} component='textarea' onKeyUp={this.handleKeyUp}
-              name='journalText'
-              type='textarea'
-              label='JournalText'
-              placeholder='Type here'
-        />
-      </FormGroup> 
+    <div>
+      <PageHeader><span>Journal</span></PageHeader>
+      <Form 
+        className='JournalForm' 
+        onSubmit={this.props.handleSubmit(values => this.onSubmit(values))}
+        onReset={this.props.reset}
+        horizontal>
+        {error}
+        <FormGroup controlId='formControlsUserName'>
+          <FormControl componentClass={Field} component='input' 
+                name='title'
+                type='text'
+                label='Title'
+                placeholder='Title'
+          />
+        </FormGroup>
+        <FormGroup controlId='formControlsUserName'>
+          <FormControl componentClass={Field} component='textarea' onKeyUp={this.handleKeyUp}
+                name='journalText'
+                type='textarea'
+                label='JournalText'
+                placeholder='Type here'
+          />
+        </FormGroup> 
 
-      <Accordion>
-        <Panel header={detailsHeader} eventKey='1' bsStyle='primary'>
-          <FormGroup>  
-            <Col componentClass={ControlLabel} sm={2}>
-              Date: 
-            </Col>    
-            <Col sm={10}> 
-              <FormControl componentClass={Field} component='input' 
-                name='timestamp'
-                type='datetime-local'
-              />
-            </Col> 
-          </FormGroup> 
-          <FormGroup>
-            <Col sm={2}>
-            </Col>    
-            <Col sm={10}> 
-              <Field name='doctorCheckbox' component='input' type='checkbox'/>
-              {'  '}
-              <ControlLabel>Doctor visit</ControlLabel>
-            </Col>
-          </FormGroup>
-          <FormGroup>
-            <Col sm={2}>
-            </Col>    
-            <Col sm={10}> 
-              <Field name='importantCheckbox' component='input' type='checkbox'/>
-              {'  '}
-              <ControlLabel>Important</ControlLabel>
-            </Col>
-          </FormGroup>
+        <Accordion>
+          <Panel header={detailsHeader} eventKey='1' bsStyle='primary'>
+            <FormGroup>  
+              <Col componentClass={ControlLabel} sm={2}>
+                Date: 
+              </Col>    
+              <Col sm={10}> 
+                <FormControl componentClass={Field} component='input' 
+                  name='timestamp'
+                  type='datetime-local'
+                />
+              </Col> 
+            </FormGroup> 
+            <FormGroup>
+              <Col sm={2}>
+              </Col>    
+              <Col sm={10}> 
+                <Field name='doctorCheckbox' component='input' type='checkbox'/>
+                {'  '}
+                <ControlLabel>Doctor visit</ControlLabel>
+              </Col>
+            </FormGroup>
+            <FormGroup>
+              <Col sm={2}>
+              </Col>    
+              <Col sm={10}> 
+                <Field name='importantCheckbox' component='input' type='checkbox'/>
+                {'  '}
+                <ControlLabel>Important</ControlLabel>
+              </Col>
+            </FormGroup>
 
-          <FormGroup>
-            <Col componentClass={ControlLabel} sm={2}>
-              Weight: 
-            </Col> 
-            <Col sm={10}>      
-              <FormControl componentClass={Field} component='input'  
-                  name='weight'
-                  type='number'
-                  min='0'
-                  max='1000'
-              />
-            </Col> 
-          </FormGroup>
-
-          <Panel header='Blood Pressure' >
             <FormGroup>
               <Col componentClass={ControlLabel} sm={2}>
-                Top Number (Systolic): 
+                Weight: 
               </Col> 
               <Col sm={10}>      
                 <FormControl componentClass={Field} component='input'  
-                    name='systolic'
+                    name='weight'
                     type='number'
                     min='0'
                     max='1000'
                 />
               </Col> 
             </FormGroup>
-            <FormGroup>
-              <Col componentClass={ControlLabel} sm={2}>
-                Bottom Number (Diastolic): 
-              </Col> 
-              <Col sm={10}>      
-                <FormControl componentClass={Field} component='input'  
-                    name='diastolic'
-                    type='number'
-                    min='0'
-                    max='1000'
-                />
-              </Col> 
-            </FormGroup>
+
+            <Panel header='Blood Pressure' >
+              <FormGroup>
+                <Col componentClass={ControlLabel} sm={2}>
+                  Top Number (Systolic): 
+                </Col> 
+                <Col sm={10}>      
+                  <FormControl componentClass={Field} component='input'  
+                      name='systolic'
+                      type='number'
+                      min='0'
+                      max='1000'
+                  />
+                </Col> 
+              </FormGroup>
+              <FormGroup>
+                <Col componentClass={ControlLabel} sm={2}>
+                  Bottom Number (Diastolic): 
+                </Col> 
+                <Col sm={10}>      
+                  <FormControl componentClass={Field} component='input'  
+                      name='diastolic'
+                      type='number'
+                      min='0'
+                      max='1000'
+                  />
+                </Col> 
+              </FormGroup>
+            </Panel>
           </Panel>
-        </Panel>
-      </Accordion>
+        </Accordion>
 
-      <ButtonGroup className='pull-right'>
+        <ButtonGroup className='pull-right'>
+            <Button
+              type='button'
+              disabled={this.props.submitting}
+              onClick={()=>{this.props.dispatch(closeNewJournalPage())}}>
+              Close
+            </Button>
           <Button
-            type='button'
-            disabled={this.props.submitting}
-            onClick={()=>{this.props.dispatch(closeNewJournalPage())}}>
-            Close
+            type='reset'
+            disabled={this.props.pristine || this.props.submitting}>
+            Reset
           </Button>
-        <Button
-          type='reset'
-          disabled={this.props.pristine || this.props.submitting}>
-          Reset
-        </Button>
-        <Button
-          type='submit'
-          disabled={this.props.pristine || this.props.submitting}
-          bsStyle='primary'>
-          Create
-        </Button>
-      </ButtonGroup>
-    </Form>
+          <Button
+            type='submit'
+            disabled={this.props.pristine || this.props.submitting}
+            bsStyle='primary'>
+            Create
+          </Button>
+        </ButtonGroup>
+      </Form>
+    </div>
     );
   }
 }

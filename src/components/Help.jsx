@@ -12,6 +12,7 @@ import {Redirect} from 'react-router-dom';
 const titleHelp = (<h3>Help Page</h3>);
 const titleDashboard = (<h3>Dashboard</h3>);
 const titleJournal = (<h3>Journal</h3>);
+const titleUserData = (<h3>User Data</h3>);
 
 export class Help extends React.Component {
 
@@ -25,15 +26,11 @@ export class Help extends React.Component {
       <div>
         <PageHeader><span>Help</span></PageHeader>
         <Panel header={titleHelp}>
-          <Col sm={4}>
+          <Col sm={6}>
             This is the help page.  It can be accessed anytime from the dropdown menu on the upper right.
             <br /><br />
           </Col>
-          <Col sm={4}>
-            <Image src='/help0002.png' alt='[Help link screenshot for small screens.]' thumbnail className='center-block'/>
-            <br />
-          </Col>
-          <Col sm={4} >
+          <Col sm={6} >
               <Image src='/help0001.png' alt='[Help link screenshot for large screens.]' thumbnail className='center-block'/>
           </Col>
         </Panel>
@@ -44,6 +41,16 @@ export class Help extends React.Component {
           </Col>
           <Col sm={6}>
             <Image src='/help0101.png' alt='[Dashboard screenshot.]' thumbnail className='center-block'/>
+            <br />
+          </Col>
+        </Panel>
+        <Panel header={titleUserData}>
+          <Col sm={6}>
+            The User Data page allows you to view and change pregnancy data such as due date, doctor's contact info.  You can also change the color scheme from here.
+            <br /><br />
+          </Col>
+          <Col sm={6}>
+            <Image src='/help0401.png' alt='[User Data screenshot.]' thumbnail className='center-block'/>
             <br />
           </Col>
         </Panel>

@@ -5,13 +5,13 @@ import {
     UPDATE_USER_DATA_ERROR
 } from '../actions/users';
 
-const validColors = ['pink','green','blue'];
+const startColors = ['pink', /*'green', */'blue'];
 
 const initialState = {
     data: {
 
     // start with random color theme
-      colorTheme: validColors[Math.floor(Math.random()*validColors.length)]
+      colorTheme: startColors[Math.floor(Math.random()*startColors.length)]
     },
     error: null
 };

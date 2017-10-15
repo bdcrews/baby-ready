@@ -57,6 +57,12 @@ margin: 11px 0 17px 0;
     text-align: center;
 }
 
+#BR strong.dueDateBanner div {
+    font-family: 'Architects Daughter', cursive;
+    font-size: 50px;
+} 
+
+
 /* button styles */
 #BR button {
     background-color: #fff;
@@ -126,7 +132,6 @@ a.anchor {
 #BR .form-control {
     display: inline-block;
 }
-
 /* media queries */
 @media only screen and (max-width: 767px) {
     #BR nav.NavBar  {
